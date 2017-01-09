@@ -29,37 +29,102 @@ using NUnit.Framework;
 using System.Data;
 using CSF.Data;
 using Moq;
+using System.Collections;
+using System.Collections.Generic;
+using Ploeh.AutoFixture;
+using System.Linq;
 
 namespace Test.CSF.Data
 {
   [TestFixture]
   public class TestIDbCommandExtensions
   {
-    [Test]
-    public void TestAddParameter()
+    #region fields
+
+    private IFixture _autofixture;
+
+    private Mock<IDbCommand> _command;
+    private Mock<IDbDataParameter> _param;
+    private Mock<IDataParameterCollection> _params;
+
+    private IList<IDbDataParameter> _addedParameters;
+
+    #endregion
+
+    #region setup
+
+    [SetUp]
+    public void Setup()
     {
-      var command = new Mock<IDbCommand>(MockBehavior.Strict);
-      var parameter = new Mock<IDbDataParameter>(MockBehavior.Strict);
-      var paramsCollection = new Mock<IDataParameterCollection>(MockBehavior.Strict);
+      _autofixture = new Fixture();
 
-      command.Setup(x => x.CreateParameter()).Returns(parameter.Object);
-      parameter.SetupSet(x => x.ParameterName = It.IsAny<string>());
-      parameter.SetupSet(x => x.Value = It.IsAny<object>());
-      paramsCollection
-        .As<System.Collections.IList>()
-        .Setup(x => x.Add(It.Is<IDbDataParameter>(val => val == parameter.Object)))
+      _addedParameters = new List<IDbDataParameter>();
+
+      _command = new Mock<IDbCommand>();
+      _param = new Mock<IDbDataParameter>();
+      _params = new Mock<IDataParameterCollection>();
+
+      _params.As<IList>()
+        .Setup(x => x.Add(It.IsAny<IDbDataParameter>()))
+        .Callback((object param) => _addedParameters.Add((IDbDataParameter) param))
         .Returns(1);
-      command.SetupGet(x => x.Parameters).Returns(paramsCollection.Object);
 
-      command.Object.AddParameter("TheMeaning", 42);
+      _command.Setup(x => x.CreateParameter()).Returns(_param.Object);
+      _command.SetupGet(x => x.Parameters).Returns(_params.Object);
 
-      command.Verify(x => x.CreateParameter(), Times.Once());
-      parameter.VerifySet(x => x.ParameterName = It.Is<string>(val => val == "TheMeaning"), Times.Once());
-      parameter.VerifySet(x => x.Value = It.Is<int>(val => val == 42), Times.Once());
-      paramsCollection
-        .As<System.Collections.IList>()
-        .Verify(x => x.Add(It.Is<IDbDataParameter>(val => val == parameter.Object)), Times.Once());
+      _param.SetupProperty(x => x.ParameterName);
+      _param.SetupProperty(x => x.Value);
     }
+
+    #endregion
+
+    #region tests
+
+    [Test]
+    public void AddParameter_generates_parameter_from_command()
+    {
+      // Arrange
+      var com = _command.Object;
+
+      // Act
+      com.AddParameter(_autofixture.Create<string>(), _autofixture.Create<string>());
+
+      // Assert
+      _command.Verify(x => x.CreateParameter(), Times.Once());
+    }
+
+    [Test]
+    public void AddParameter_adds_parameter_to_paramaters_collection()
+    {
+      // Arrange
+      var com = _command.Object;
+
+      // Act
+      com.AddParameter(_autofixture.Create<string>(), _autofixture.Create<string>());
+
+      // Assert
+      _params.Verify(x => x.Add(It.IsAny<IDbDataParameter>()), Times.Once());
+    }
+
+    [Test]
+    public void AddParameter_add_parameter_with_correct_values()
+    {
+      // Arrange
+      var com = _command.Object;
+      var name = _autofixture.Create<string>();
+      var value = _autofixture.Create<object>();
+
+      // Act
+      com.AddParameter(name, value);
+
+      // Assert
+      var added = _addedParameters.Single();
+      Assert.AreEqual(name, added.ParameterName, "ParameterName");
+      Assert.AreEqual(value, added.Value, "Value");
+    }
+
+    #endregion
+
   }
 }
 
