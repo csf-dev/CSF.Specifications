@@ -40,7 +40,6 @@
     <Compile Include="IDbCommandExtensions.cs" />
     <Compile Include="InMemoryDataReader.cs" />
     <Compile Include="IQuery.cs" />
-    <Compile Include="IQuery`1.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
