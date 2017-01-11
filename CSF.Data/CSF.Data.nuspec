@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>CSF.Data</id>
+    <version>1.0.0</version>
+    <title>CSF.Data</title>
+    <authors>CSF Software Ltd</authors>
+    <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/csf-dev/CSF.Utils</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Types to assist in interacting with data-source, including some test fakes.</description>
+    <copyright>Copyright 2017</copyright>
+  </metadata>
+  <files>
+    <file src="bin/Release/CSF.Data.dll" target="lib/net45" />
+    <file src="bin/Release/CSF.Data.xml" target="lib/net45" />
+  </files>
+</package>
