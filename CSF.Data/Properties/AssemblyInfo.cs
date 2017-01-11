@@ -29,7 +29,7 @@ using System.Runtime.CompilerServices;
 
 [assembly: CLSCompliant(true)]
 [assembly: AssemblyTitle("CSF.Data")]
-[assembly: AssemblyDescription("Helper types related to the System.Data namespace")]
+[assembly: AssemblyDescription("Types which assist interoperability with data-sources.")]
 [assembly: AssemblyCompany("CSF Software Limited")]
 [assembly: AssemblyProduct("CSF Software Utilities")]
 [assembly: AssemblyCopyright("CSF Software Limited")]
@@ -40,5 +40,5 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyConfiguration("Release")]
 #endif
 
-[assembly: AssemblyVersion("5.0.0")]
+[assembly: AssemblyVersion("1.0.0")]
 
