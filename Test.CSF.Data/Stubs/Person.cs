@@ -1,10 +1,10 @@
 ﻿//
-// AssemblyInfo.cs
+// Person.cs
 //
 // Author:
 //       Craig Fowler <craig@craigfowler.me.uk>
 //
-// Copyright (c) 2016 Craig Fowler
+// Copyright (c) 2017 Craig Fowler
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,21 +24,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 
-[assembly: CLSCompliant(true)]
-[assembly: AssemblyTitle("CSF.Data")]
-[assembly: AssemblyDescription("Types which assist interoperability with data-sources.")]
-[assembly: AssemblyCompany("CSF Software Limited")]
-[assembly: AssemblyProduct("CSF Software Utilities")]
-[assembly: AssemblyCopyright("CSF Software Limited")]
+namespace Test.CSF.Data.Stubs
+{
+  public class Person
+  {
+    public long Identity
+    {
+      get;
+      set;
+    }
 
-#if DEBUG
-[assembly: AssemblyConfiguration("Debug")]
-#else
-[assembly: AssemblyConfiguration("Release")]
-#endif
-
-[assembly: AssemblyVersion("1.0.0")]
+    public string Name
+    {
+      get;
+      set;
+    }
+  }
+}
 
