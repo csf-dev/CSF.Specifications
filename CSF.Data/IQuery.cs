@@ -38,7 +38,7 @@ namespace CSF.Data
     /// </summary>
     /// <remarks>
     /// <para>
-    /// This method will always return a non-null object instance, even if the underlying object does not exist in the
+    /// This method should always return a non-null object instance, even if the underlying object does not exist in the
     /// data source.  If a 'thoery object' is created for an object which does not actually exist, then an exception
     /// could be thrown if that theory object is used.
     /// </para>
