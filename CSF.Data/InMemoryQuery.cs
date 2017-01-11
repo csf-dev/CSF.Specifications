@@ -123,7 +123,7 @@ namespace CSF.Data
         throw new ArgumentNullException(nameof(identity));
       }
 
-      var inMemoryItem = new InMemoryItem(typeof(TItem), identity, item);
+      var inMemoryItem = new InMemoryItem(item.GetType(), identity, item);
       _items.Add(inMemoryItem);
 
       return this;

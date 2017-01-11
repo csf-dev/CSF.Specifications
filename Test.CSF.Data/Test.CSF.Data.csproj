@@ -41,7 +41,7 @@
     <Reference Include="Ploeh.AutoFixture">
       <HintPath>..\packages\AutoFixture.3.50.2\lib\net40\Ploeh.AutoFixture.dll</HintPath>
     </Reference>
-    <Reference Include="nunit">
+    <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
   </ItemGroup>
@@ -50,6 +50,7 @@
     <Compile Include="TestInMemoryDataReader.cs" />
     <Compile Include="TestInMemoryQuery.cs" />
     <Compile Include="Stubs\Person.cs" />
+    <Compile Include="Stubs\Employee.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

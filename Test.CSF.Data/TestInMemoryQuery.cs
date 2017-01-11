@@ -75,6 +75,22 @@ namespace Test.CSF.Data
     }
 
     [Test]
+    public void Add_uses_item_real_type()
+    {
+      // Arrange
+      Person item = new Employee() { Identity = _autofixture.Create<long>() };
+
+      // Act
+      _sut.Add(item, item.Identity);
+
+      // Assert
+      var added = _sut.GetContents();
+      var addedItem = added.Single();
+
+      Assert.AreEqual(typeof(Employee), addedItem.Type, "Item type");
+    }
+
+    [Test]
     public void Add_same_item_twice_does_not_create_duplicates()
     {
       // Arrange
