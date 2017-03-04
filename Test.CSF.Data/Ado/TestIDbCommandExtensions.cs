@@ -33,8 +33,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Ploeh.AutoFixture;
 using System.Linq;
+using CSF.Data.Ado;
 
-namespace Test.CSF.Data
+namespace Test.CSF.Data.Ado
 {
   [TestFixture]
   public class TestIDbCommandExtensions

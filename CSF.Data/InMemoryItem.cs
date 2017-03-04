@@ -51,7 +51,7 @@ namespace CSF.Data
     public object Item { get; private set; }
 
     /// <summary>
-    /// Serves as a hash function for a <see cref="CSF.Data.InMemoryItem"/> object.
+    /// Serves as a hash function for a <see cref="InMemoryItem"/> object.
     /// </summary>
     /// <returns>A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a hash table.</returns>
     public override int GetHashCode()
@@ -60,11 +60,11 @@ namespace CSF.Data
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="System.Object"/> is equal to the current <see cref="CSF.Data.InMemoryItem"/>.
+    /// Determines whether the specified <see cref="object"/> is equal to the current <see cref="InMemoryItem"/>.
     /// </summary>
-    /// <param name="obj">The <see cref="System.Object"/> to compare with the current <see cref="CSF.Data.InMemoryItem"/>.</param>
-    /// <returns><c>true</c> if the specified <see cref="System.Object"/> is equal to the current
-    /// <see cref="CSF.Data.InMemoryItem"/>; otherwise, <c>false</c>.</returns>
+    /// <param name="obj">The <see cref="object"/> to compare with the current <see cref="InMemoryItem"/>.</param>
+    /// <returns><c>true</c> if the specified <see cref="object"/> is equal to the current
+    /// <see cref="InMemoryItem"/>; otherwise, <c>false</c>.</returns>
     public override bool Equals(object obj)
     {
       var other = obj as InMemoryItem;
@@ -78,7 +78,7 @@ namespace CSF.Data
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Data.InMemoryItem"/> class.
+    /// Initializes a new instance of the <see cref="InMemoryItem"/> class.
     /// </summary>
     /// <param name="type">Type.</param>
     /// <param name="identity">Identity.</param>

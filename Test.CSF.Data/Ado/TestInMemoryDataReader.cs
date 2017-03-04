@@ -29,8 +29,9 @@ using System.Data;
 using System.Linq;
 using NUnit.Framework;
 using CSF.Data;
+using CSF.Data.Ado;
 
-namespace Test.CSF.Data
+namespace Test.CSF.Data.Ado
 {
   [TestFixture]
   public class TestInMemoryDataReader

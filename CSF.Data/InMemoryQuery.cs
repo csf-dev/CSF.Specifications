@@ -41,7 +41,7 @@ namespace CSF.Data
   {
     #region fields
 
-    private ISet<InMemoryItem> _items;
+    readonly ISet<InMemoryItem> _items;
 
     #endregion
 
@@ -137,7 +137,7 @@ namespace CSF.Data
     /// <typeparam name="TItem">The item type.</typeparam>
     /// <returns>A reference to the current instance, such that method calls may be chained.</returns>
     public virtual InMemoryQuery Add<TItem>(IEnumerable<TItem> items,
-                                            Func<TItem,object> identitySelector) where TItem : class
+                                            Func<TItem, object> identitySelector) where TItem : class
     {
       if(items == null)
       {
@@ -174,7 +174,7 @@ namespace CSF.Data
     /// </summary>
     /// <returns>The items which match the requested type.</returns>
     /// <typeparam name="TQueried">The requested item type.</typeparam>
-    private IQueryable<InMemoryItem> GetItemsOfType<TQueried>() where TQueried : class
+    IQueryable<InMemoryItem> GetItemsOfType<TQueried>() where TQueried : class
     {
       return _items.Where(x => typeof(TQueried).IsAssignableFrom(x.Type)).AsQueryable();
     }
@@ -184,7 +184,7 @@ namespace CSF.Data
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Data.InMemoryQuery"/> class.
+    /// Initializes a new instance of the <see cref="InMemoryQuery"/> class.
     /// </summary>
     public InMemoryQuery()
     {

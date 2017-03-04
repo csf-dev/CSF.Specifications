@@ -40,14 +40,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="IDbCommandExtensions.cs" />
-    <Compile Include="InMemoryDataReader.cs" />
     <Compile Include="IQuery.cs" />
     <Compile Include="InMemoryQuery.cs" />
     <Compile Include="InMemoryItem.cs" />
     <Compile Include="IQueryObject.cs" />
     <Compile Include="IScalarQueryObject.cs" />
     <Compile Include="IPersister.cs" />
+    <Compile Include="Ado\IDbCommandExtensions.cs" />
+    <Compile Include="Ado\InMemoryDataReader.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
