@@ -45,8 +45,6 @@
     <Compile Include="IQuery.cs" />
     <Compile Include="InMemoryQuery.cs" />
     <Compile Include="InMemoryItem.cs" />
-    <Compile Include="IQueryObject.cs" />
-    <Compile Include="IScalarQueryObject.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
