@@ -46,5 +46,8 @@
     <Compile Include="InMemoryQuery.cs" />
     <Compile Include="InMemoryItem.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="CSF.Data.nuspec" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
