@@ -2,11 +2,11 @@
 <package>
   <metadata>
     <id>CSF.Data</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <title>CSF.Data</title>
     <authors>CSF Software Ltd</authors>
     <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
-    <projectUrl>https://github.com/csf-dev/CSF.Utils</projectUrl>
+    <projectUrl>https://github.com/csf-dev/CSF.Data</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Types to assist in interacting with data-source, including some test fakes.</description>
     <copyright>Copyright 2017</copyright>
