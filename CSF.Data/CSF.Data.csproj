@@ -45,6 +45,11 @@
     <Compile Include="IQuery.cs" />
     <Compile Include="InMemoryQuery.cs" />
     <Compile Include="InMemoryItem.cs" />
+    <Compile Include="ITransactionCreator.cs" />
+    <Compile Include="ITransaction.cs" />
+    <Compile Include="NoOpTransaction.cs" />
+    <Compile Include="TransactionRollbackException.cs" />
+    <Compile Include="NoOpTransactionCreator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CSF.Data.nuspec" />
