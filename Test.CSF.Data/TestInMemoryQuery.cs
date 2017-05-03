@@ -181,6 +181,24 @@ namespace Test.CSF.Data
       Assert.AreSame(item1, result);
     }
 
+    [Test,AutoMoqData]
+    public void Delete_removes_the_item(Person item,
+                                        long identity,
+                                        InMemoryQuery sut)
+    {
+      // Arrange
+      item.Identity = identity;
+      sut.Add(item, item.Identity);
+
+      // Act
+      sut.Delete<Person>(identity);
+
+      // Assert
+      var contents = sut.GetContents();
+      Assert.IsEmpty(contents);
+    }
+
+
     #endregion
   }
 }

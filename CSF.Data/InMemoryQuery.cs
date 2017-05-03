@@ -157,6 +157,45 @@ namespace CSF.Data
     }
 
     /// <summary>
+    /// Deletes a single item from the query.
+    /// </summary>
+    /// <param name="item">Item.</param>
+    /// <typeparam name="TItem">The item type.</typeparam>
+    public virtual void Delete<TItem>(TItem item) where TItem : class
+    {
+      if(item == null)
+        throw new ArgumentNullException(nameof(item));
+      
+      Delete(x => ReferenceEquals(item, x.Item));
+    }
+
+    /// <summary>
+    /// Delete an item with a matching identity from the query.
+    /// </summary>
+    /// <param name="identity">Identity.</param>
+    /// <typeparam name="TItem">The item type.</typeparam>
+    public virtual void Delete<TItem>(object identity) where TItem : class
+    {
+      if(identity == null)
+        throw new ArgumentNullException(nameof(identity));
+
+      Delete(x => typeof(TItem).IsAssignableFrom(x.Type) && Equals(identity, x.Identity));
+    }
+
+    /// <summary>
+    /// Deletes items from the query where they match a given predicate.
+    /// </summary>
+    /// <param name="itemSelector">The item selector.</param>
+    /// <typeparam name="TItem">The item type.</typeparam>
+    public virtual void Delete<TItem>(Func<TItem,bool> itemSelector) where TItem : class
+    {
+      if(itemSelector == null)
+        throw new ArgumentNullException(nameof(itemSelector));
+
+      Delete(x => typeof(TItem).IsAssignableFrom(x.Type) && itemSelector((TItem) x.Item));
+    }
+
+    /// <summary>
     /// Gets the contents of the current instance for inspection.
     /// </summary>
     /// <returns>The contents.</returns>
@@ -174,9 +213,19 @@ namespace CSF.Data
     /// </summary>
     /// <returns>The items which match the requested type.</returns>
     /// <typeparam name="TQueried">The requested item type.</typeparam>
-    private IQueryable<InMemoryItem> GetItemsOfType<TQueried>() where TQueried : class
+    IQueryable<InMemoryItem> GetItemsOfType<TQueried>() where TQueried : class
     {
       return _items.Where(x => typeof(TQueried).IsAssignableFrom(x.Type)).AsQueryable();
+    }
+
+    void Delete(Func<InMemoryItem,bool> predicate)
+    {
+      var toDelete = GetContents().Where(predicate).ToArray();
+
+      foreach(var item in toDelete)
+      {
+        _items.Remove(item);
+      }
     }
 
     #endregion
