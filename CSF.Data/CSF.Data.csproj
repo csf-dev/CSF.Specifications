@@ -50,6 +50,8 @@
     <Compile Include="NoOpTransaction.cs" />
     <Compile Include="TransactionRollbackException.cs" />
     <Compile Include="NoOpTransactionCreator.cs" />
+    <Compile Include="IPersister.cs" />
+    <Compile Include="InMemoryPersister.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CSF.Data.nuspec" />
