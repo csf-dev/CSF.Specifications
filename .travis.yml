@@ -7,4 +7,4 @@ install:
 
 script:
   - xbuild /p:Configuration=Debug CSF.Data.sln
-  - mono "./testrunner/NUnit.ConsoleRunner.3.6.1/tools/nunit3-console.exe" Test.CSF.Data/bin/Debug/Test.CSF.dll
+  - mono "./testrunner/NUnit.ConsoleRunner.3.6.1/tools/nunit3-console.exe" Test.CSF.Data/bin/Debug/Test.CSF.Data.dll

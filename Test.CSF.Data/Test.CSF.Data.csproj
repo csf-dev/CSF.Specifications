@@ -8,7 +8,7 @@
     <ProjectGuid>{11DCF35A-6E2A-4C62-B536-14B83FF5AE07}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Test.CSF.Data</RootNamespace>
-    <AssemblyName>Test.CSF</AssemblyName>
+    <AssemblyName>Test.CSF.Data</AssemblyName>
     <ReleaseVersion>1.1.0</ReleaseVersion>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
