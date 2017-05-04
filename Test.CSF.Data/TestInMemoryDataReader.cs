@@ -78,12 +78,11 @@ namespace Test.CSF.Data
     }
 
     [Test]
-    [ExpectedException(typeof(InvalidOperationException))]
     public void TestGetValueNotReadYet()
     {
       using(IDataReader reader = new InMemoryDataReader(false, this.Data1))
       {
-        reader.GetString(0);
+        Assert.Throws<InvalidOperationException>(() => reader.GetString(0));
       }
     }
 
@@ -131,13 +130,12 @@ namespace Test.CSF.Data
     }
 
     [Test]
-    [ExpectedException(typeof(InvalidOperationException))]
     public void TestGetStringNull()
     {
       using(IDataReader reader = new InMemoryDataReader(false, this.Data4))
       {
-        Assert.IsTrue(reader.Read(), "Read");
-        reader.GetString(1);
+        reader.Read();
+        Assert.Throws<InvalidOperationException>(() => reader.GetString(1));
       }
     }
 

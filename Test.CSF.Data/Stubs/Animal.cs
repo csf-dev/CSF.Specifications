@@ -1,10 +1,10 @@
 ﻿//
-// AssemblyInfo.cs
+// Animal.cs
 //
 // Author:
-//       Craig Fowler <craig@craigfowler.me.uk>
+//       Craig Fowler <craig@csf-dev.com>
 //
-// Copyright (c) 2016 Craig Fowler
+// Copyright (c) 2017 Craig Fowler
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,21 +24,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using System.Reflection;
-using System.Runtime.CompilerServices;
+namespace Test.CSF.Data.Stubs
+{
+  public class Animal
+  {
+    public long Identity
+    {
+      get;
+      set;
+    }
 
-[assembly: CLSCompliant(true)]
-[assembly: AssemblyTitle("CSF.Data")]
-[assembly: AssemblyDescription("Types which assist interoperability with data-sources.")]
-[assembly: AssemblyCompany("CSF Software Limited")]
-[assembly: AssemblyProduct("CSF Software Utilities")]
-[assembly: AssemblyCopyright("CSF Software Limited")]
-
-#if DEBUG
-[assembly: AssemblyConfiguration("Debug")]
-#else
-[assembly: AssemblyConfiguration("Release")]
-#endif
-
-[assembly: AssemblyVersion("1.1.0")]
-
+    public string Name
+    {
+      get;
+      set;
+    }
+  }
+}

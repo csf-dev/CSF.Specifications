@@ -35,153 +35,169 @@ namespace Test.CSF.Data
   [TestFixture]
   public class TestInMemoryQuery
   {
-    #region fields
-
-    private IFixture _autofixture;
-    private InMemoryQuery _sut;
-
-    #endregion
-
-    #region setup
-
-    [SetUp]
-    public void Setup()
-    {
-      _autofixture = new Fixture();
-      _sut = new InMemoryQuery();
-    }
-
-    #endregion
-
     #region tests
 
-    [Test]
-    public void Add_single_adds_item()
+    [Test,AutoMoqData]
+    public void Add_single_adds_item(Person item,
+                                     long identity,
+                                     InMemoryQuery sut)
     {
       // Arrange
-      var item = new Person() { Identity = _autofixture.Create<long>() };
+      item.Identity = identity;
 
       // Act
-      _sut.Add(item, item.Identity);
+      sut.Add(item, item.Identity);
 
       // Assert
-      var added = _sut.GetContents();
-      Assert.AreEqual(1, added.Count(), "Item count");
-      var addedItem = added.Single();
-
-      Assert.AreEqual(typeof(Person), addedItem.Type, "Item type");
-      Assert.AreEqual(item.Identity, addedItem.Identity, "Item identity");
-      Assert.AreSame(item, addedItem.Item, "Item is same instance");
+      var added = sut.GetContents();
+      Assert.AreSame(item, added.Single().Item);
     }
 
-    [Test]
-    public void Add_uses_item_real_type()
+    [Test,AutoMoqData]
+    public void Add_uses_item_real_type(Employee item,
+                                        long identity,
+                                        InMemoryQuery sut)
     {
       // Arrange
-      Person item = new Employee() { Identity = _autofixture.Create<long>() };
+      item.Identity = identity;
+      Person castItem = item;
 
       // Act
-      _sut.Add(item, item.Identity);
+      sut.Add(castItem, castItem.Identity);
 
       // Assert
-      var added = _sut.GetContents();
-      var addedItem = added.Single();
-
-      Assert.AreEqual(typeof(Employee), addedItem.Type, "Item type");
+      var added = sut.GetContents();
+      Assert.AreEqual(typeof(Employee), added.Single().Type);
     }
 
-    [Test]
-    public void Add_same_item_twice_does_not_create_duplicates()
+    [Test,AutoMoqData]
+    public void Add_same_item_twice_does_not_create_duplicates(Person item,
+                                                               long identity,
+                                                               InMemoryQuery sut)
     {
       // Arrange
-      var item = new Person() { Identity = _autofixture.Create<long>() };
+      item.Identity = identity;
 
       // Act
-      _sut
+      sut
         .Add(item, item.Identity)
         .Add(item, item.Identity);
 
       // Assert
-      var added = _sut.GetContents();
+      var added = sut.GetContents();
       Assert.AreEqual(1, added.Count());
     }
 
-    [Test]
-    public void Add_multiple_adds_multiple_items()
+    [Test,AutoMoqData]
+    public void Add_multiple_adds_multiple_items(Person item1,
+                                                 long identity1,
+                                                 Person item2,
+                                                 long identity2,
+                                                 InMemoryQuery sut)
     {
       // Arrange
-      var items = new [] {
-        new Person() { Identity = _autofixture.Create<long>() },
-        new Person() { Identity = _autofixture.Create<long>() },
-      };
+      item1.Identity = identity1;
+      item2.Identity = identity2;
+      var items = new [] { item1, item2 };
 
       // Act
-      _sut.Add(items, x => x.Identity);
+      sut.Add(items, x => x.Identity);
 
       // Assert
-      var added = _sut.GetContents();
-      Assert.AreEqual(2, added.Count(), "Item count");
-
-      var addedItems = added.Select(x => x.Item).ToArray();
-      CollectionAssert.AreEquivalent(items, addedItems, "All items added");
+      var added = sut.GetContents().Select(x => x.Item).ToArray();
+      CollectionAssert.AreEquivalent(items, added);
     }
 
-    [Test]
-    public void Query_exposes_added_items()
+    [Test,AutoMoqData]
+    public void Query_exposes_added_items(Person item1,
+                                          long identity1,
+                                          Person item2,
+                                          long identity2,
+                                          InMemoryQuery sut)
     {
       // Arrange
-      var items = new [] {
-        new Person() { Identity = _autofixture.Create<long>() },
-        new Person() { Identity = _autofixture.Create<long>() },
-      };
-      _sut.Add(items, x => x.Identity);
+      item1.Identity = identity1;
+      item2.Identity = identity2;
+      var items = new [] { item1, item2 };
+
+      sut.Add(items, x => x.Identity);
 
       // Act
-      var result = _sut.Query<Person>();
+      var result = sut.Query<Person>();
 
       // Assert
       CollectionAssert.AreEquivalent(items, result.ToArray());
     }
 
-    [Test]
-    public void Query_does_not_expose_items_of_other_types()
+    [Test,AutoMoqData]
+    public void Query_does_not_expose_items_of_other_types(Person item1,
+                                                           long identity1,
+                                                           Person item2,
+                                                           long identity2,
+                                                           Animal animal1,
+                                                           long animalIdentity1,
+                                                           Animal animal2,
+                                                           long animalIdentity2,
+                                                           InMemoryQuery sut)
     {
       // Arrange
-      var people = new [] {
-        new Person() { Identity = _autofixture.Create<long>() },
-        new Person() { Identity = _autofixture.Create<long>() },
-      };
-      var uris = new [] {
-        new Uri("/one/two"),
-        new Uri("/three/four"),
-      };
-      _sut
-        .Add(people, x => x.Identity)
-        .Add(uris, x => x.AbsoluteUri);
+      item1.Identity = identity1;
+      item2.Identity = identity2;
+      var items = new [] { item1, item2 };
+
+      animal1.Identity = animalIdentity1;
+      animal2.Identity = animalIdentity2;
+      var animals = new [] { animal1, animal2 };
+
+      sut
+        .Add(items, x => x.Identity)
+        .Add(animals, x => x.Identity);
 
       // Act
-      var result = _sut.Query<Person>();
+      var result = sut.Query<Person>();
 
       // Assert
-      CollectionAssert.AreEquivalent(people, result.ToArray());
+      CollectionAssert.AreEquivalent(items, result.ToArray());
     }
 
-    [Test]
-    public void Get_retrieves_correct_item()
+    [Test,AutoMoqData]
+    public void Get_retrieves_correct_item(Person item1,
+                                           long identity1,
+                                           Person item2,
+                                           long identity2,
+                                           InMemoryQuery sut)
     {
       // Arrange
-      var items = new [] {
-        new Person() { Identity = _autofixture.Create<long>() },
-        new Person() { Identity = _autofixture.Create<long>() },
-      };
-      _sut.Add(items, x => x.Identity);
+      item1.Identity = identity1;
+      item2.Identity = identity2;
+      var items = new [] { item1, item2 };
+
+      sut.Add(items, x => x.Identity);
 
       // Act
-      var result = _sut.Get<Person>(items[1].Identity);
+      var result = sut.Get<Person>(identity1);
 
       // Assert
-      Assert.AreSame(items[1], result);
+      Assert.AreSame(item1, result);
     }
+
+    [Test,AutoMoqData]
+    public void Delete_removes_the_item(Person item,
+                                        long identity,
+                                        InMemoryQuery sut)
+    {
+      // Arrange
+      item.Identity = identity;
+      sut.Add(item, item.Identity);
+
+      // Act
+      sut.Delete<Person>(identity);
+
+      // Assert
+      var contents = sut.GetContents();
+      Assert.IsEmpty(contents);
+    }
+
 
     #endregion
   }

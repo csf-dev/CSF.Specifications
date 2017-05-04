@@ -1,10 +1,10 @@
 ﻿//
-// AssemblyInfo.cs
+// ITransaction.cs
 //
 // Author:
-//       Craig Fowler <craig@craigfowler.me.uk>
+//       Craig Fowler <craig@csf-dev.com>
 //
-// Copyright (c) 2016 Craig Fowler
+// Copyright (c) 2017 Craig Fowler
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,21 +24,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using System.Reflection;
-using System.Runtime.CompilerServices;
+namespace CSF.Data
+{
+  /// <summary>
+  /// Represents a transaction, against some form of data backend.
+  /// </summary>
+  public interface ITransaction : IDisposable
+  {
+    /// <summary>
+    /// Commit this transaction to the back-end.
+    /// </summary>
+    void Commit();
 
-[assembly: CLSCompliant(true)]
-[assembly: AssemblyTitle("CSF.Data")]
-[assembly: AssemblyDescription("Types which assist interoperability with data-sources.")]
-[assembly: AssemblyCompany("CSF Software Limited")]
-[assembly: AssemblyProduct("CSF Software Utilities")]
-[assembly: AssemblyCopyright("CSF Software Limited")]
-
-#if DEBUG
-[assembly: AssemblyConfiguration("Debug")]
-#else
-[assembly: AssemblyConfiguration("Release")]
-#endif
-
-[assembly: AssemblyVersion("1.1.0")]
-
+    /// <summary>
+    /// Roll the transaction back and abort changes.
+    /// </summary>
+    void Rollback();
+  }
+}
