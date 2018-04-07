@@ -32,7 +32,7 @@ using System.Linq;
 
 namespace Test.CSF.Data
 {
-  [TestFixture]
+  [TestFixture,Parallelizable]
   public class TestInMemoryQuery
   {
     #region tests

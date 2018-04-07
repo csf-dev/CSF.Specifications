@@ -36,7 +36,7 @@ using System.Linq;
 
 namespace Test.CSF.Data
 {
-  [TestFixture]
+  [TestFixture,Parallelizable(ParallelScope.Fixtures)]
   public class TestIDbCommandExtensions
   {
     #region fields

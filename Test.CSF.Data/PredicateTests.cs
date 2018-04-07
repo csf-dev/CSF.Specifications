@@ -31,7 +31,7 @@ using System.Linq.Expressions;
 
 namespace Test.CSF.Data
 {
-  [TestFixture]
+  [TestFixture,Parallelizable]
   public class PredicateTests
   {
     [Test,AutoMoqData]
