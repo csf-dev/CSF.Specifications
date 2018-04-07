@@ -52,6 +52,8 @@
     <Compile Include="NoOpTransactionCreator.cs" />
     <Compile Include="IPersister.cs" />
     <Compile Include="InMemoryPersister.cs" />
+    <Compile Include="ParameterRebinder.cs" />
+    <Compile Include="Predicate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CSF.Data.nuspec" />
