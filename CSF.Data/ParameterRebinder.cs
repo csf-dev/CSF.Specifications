@@ -29,22 +29,36 @@ using System.Linq.Expressions;
 
 namespace CSF.Data
 {
+  /// <summary>
+  /// Implementation of <c>ExpressionVisitor</c> which alters the parameters of an expression and re-binds them using a
+  /// set of replacement parameters.
+  /// </summary>
   class ParameterRebinder : ExpressionVisitor
   {
     readonly Dictionary<ParameterExpression, ParameterExpression> parametersAndReplacements;
 
-    protected override Expression VisitParameter(ParameterExpression p)
+    /// <summary>
+    /// Visits a parameter of the visited expression and replaces it with a corresponding parameter from the
+    /// replacement list (if the parameter is indicated for replacement).
+    /// </summary>
+    /// <returns>The parameter, or its replacement.</returns>
+    /// <param name="parameter">The visited parameter.</param>
+    protected override Expression VisitParameter(ParameterExpression parameter)
     {
       ParameterExpression replacement;
 
-      if(parametersAndReplacements.TryGetValue(p, out replacement))
+      if(parametersAndReplacements.TryGetValue(parameter, out replacement))
       {
-        p = replacement;
+        parameter = replacement;
       }
 
-      return base.VisitParameter(p);
+      return base.VisitParameter(parameter);
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="T:CSF.Data.ParameterRebinder"/> class.
+    /// </summary>
+    /// <param name="parametersAndReplacements">A map of the expected parameters and their replacements.</param>
     internal ParameterRebinder(Dictionary<ParameterExpression, ParameterExpression> parametersAndReplacements)
     {
       this.parametersAndReplacements = parametersAndReplacements ?? new Dictionary<ParameterExpression, ParameterExpression>();
