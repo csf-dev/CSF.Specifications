@@ -10,7 +10,9 @@
     <RootNamespace>CSF.Data</RootNamespace>
     <AssemblyName>CSF.Data</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <ReleaseVersion>1.1.0</ReleaseVersion>
+    <ReleaseVersion>1.2.0</ReleaseVersion>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,9 +54,22 @@
     <Compile Include="NoOpTransactionCreator.cs" />
     <Compile Include="IPersister.cs" />
     <Compile Include="InMemoryPersister.cs" />
+    <Compile Include="ParameterRebinder.cs" />
+    <Compile Include="Predicate.cs" />
+    <Compile Include="Specifications\ISpecification.cs" />
+    <Compile Include="Specifications\ISpecification`1.cs" />
+    <Compile Include="Specifications\ISpecificationExpression.cs" />
+    <Compile Include="Specifications\Specification`1.cs" />
+    <Compile Include="Specifications\SpecificationExpression.cs" />
+    <Compile Include="Specifications\DynamicSpecificationExpression.cs" />
+    <Compile Include="Specifications\SpecificationExtensions.cs" />
+    <Compile Include="Specifications\Specification.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CSF.Data.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Specifications\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

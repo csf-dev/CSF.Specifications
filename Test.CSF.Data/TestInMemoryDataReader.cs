@@ -32,7 +32,7 @@ using CSF.Data;
 
 namespace Test.CSF.Data
 {
-  [TestFixture]
+  [TestFixture,Parallelizable]
   public class TestInMemoryDataReader
   {
     #region fields

@@ -1,10 +1,10 @@
 ﻿//
-// AssemblyInfo.cs
+// ISpecification.cs
 //
 // Author:
-//       Craig Fowler <craig@craigfowler.me.uk>
+//       Craig Fowler <craig@csf-dev.com>
 //
-// Copyright (c) 2016 Craig Fowler
+// Copyright (c) 2018 Craig Fowler
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,21 +24,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-
-[assembly: CLSCompliant(true)]
-[assembly: AssemblyTitle("CSF.Data")]
-[assembly: AssemblyDescription("Types which assist interoperability with data-sources.")]
-[assembly: AssemblyCompany("CSF Software Limited")]
-[assembly: AssemblyProduct("CSF Software Utilities")]
-[assembly: AssemblyCopyright("CSF Software Limited")]
-
-#if DEBUG
-[assembly: AssemblyConfiguration("Debug")]
-#else
-[assembly: AssemblyConfiguration("Release")]
-#endif
-
-[assembly: AssemblyVersion("1.2.0")]
-
+namespace CSF.Data.Specifications
+{
+  /// <summary>
+  /// A type which acts as a specification, and may be used to test object instances to determine whether or not they
+  /// conform to that specification.
+  /// </summary>
+  public interface ISpecification
+  {
+    /// <summary>
+    /// Gets a value which indicates whether or not the given object matches this specification instance or not.
+    /// </summary>
+    /// <returns><c>true</c> if the object matches this specification; <c>false</c> otherwise.</returns>
+    /// <param name="obj">The object instance to test against the specification.</param>
+    bool Matches(object obj);
+  }
+}

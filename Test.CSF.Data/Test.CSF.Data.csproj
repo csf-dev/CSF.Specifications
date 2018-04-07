@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Test.CSF.Data</RootNamespace>
     <AssemblyName>Test.CSF.Data</AssemblyName>
-    <ReleaseVersion>1.1.0</ReleaseVersion>
+    <ReleaseVersion>1.2.0</ReleaseVersion>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -62,6 +62,14 @@
     <Compile Include="Stubs\Employee.cs" />
     <Compile Include="AutoMoqDataAttribute.cs" />
     <Compile Include="Stubs\Animal.cs" />
+    <Compile Include="PredicateTests.cs" />
+    <Compile Include="Specifications\SpecificationTests.cs" />
+    <Compile Include="Stubs\PersonNameSpecificationExpression.cs" />
+    <Compile Include="Stubs\PersonNameSpecification.cs" />
+    <Compile Include="Specifications\SpecificationExpressionTests.cs" />
+    <Compile Include="Specifications\SpecificationTestBase.cs" />
+    <Compile Include="Specifications\SpecificationExtensionsTests.cs" />
+    <Compile Include="Stubs\PersonIdentifierSpecificationExpression.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -76,5 +84,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Stubs\" />
+    <Folder Include="Specifications\" />
   </ItemGroup>
 </Project>
