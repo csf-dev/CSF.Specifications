@@ -62,6 +62,7 @@
     <Compile Include="Stubs\Employee.cs" />
     <Compile Include="AutoMoqDataAttribute.cs" />
     <Compile Include="Stubs\Animal.cs" />
+    <Compile Include="PredicateTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
