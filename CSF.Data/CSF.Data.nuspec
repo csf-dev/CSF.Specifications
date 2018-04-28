@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>CSF.Data</id>
-    <version>1.2.0</version>
+    <version>1.2.1</version>
     <title>CSF.Data</title>
     <authors>CSF Software Ltd</authors>
     <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
