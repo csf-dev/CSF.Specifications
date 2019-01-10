@@ -27,7 +27,7 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace CSF.Data.Specifications
+namespace CSF.Specifications
 {
   /// <summary>
   /// Base type for implementations of <see cref="ISpecificationExpression{T}"/> implementations, which

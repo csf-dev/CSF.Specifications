@@ -26,7 +26,7 @@
 using System;
 using System.Linq;
 
-namespace CSF.Data.Specifications
+namespace CSF.Specifications
 {
   /// <summary>
   /// Base type for implementations of the generic <see cref="Specification{T}"/> type.

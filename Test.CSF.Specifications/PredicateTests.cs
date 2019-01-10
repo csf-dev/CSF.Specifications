@@ -24,12 +24,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+using CSF;
 using NUnit.Framework;
-using CSF.Data;
-using Test.CSF.Data.Stubs;
-using System.Linq.Expressions;
+using Test.CSF.Specifications.Stubs;
 
-namespace Test.CSF.Data
+namespace Test.CSF.Specifications
 {
   [TestFixture,Parallelizable]
   public class PredicateTests

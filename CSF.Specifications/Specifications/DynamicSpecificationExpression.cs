@@ -26,7 +26,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace CSF.Data.Specifications
+namespace CSF.Specifications
 {
   /// <summary>
   /// Implementation of a <see cref="SpecificationExpression{T}"/> which makes use of a dynamic expression instance

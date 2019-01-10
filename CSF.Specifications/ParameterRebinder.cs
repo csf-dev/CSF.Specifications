@@ -27,7 +27,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace CSF.Data
+namespace CSF
 {
   /// <summary>
   /// Implementation of <c>ExpressionVisitor</c> which alters the parameters of an expression and re-binds them using a
@@ -56,7 +56,7 @@ namespace CSF.Data
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="T:CSF.Data.ParameterRebinder"/> class.
+    /// Initializes a new instance of the <see cref="T:CSF.ParameterRebinder"/> class.
     /// </summary>
     /// <param name="parametersAndReplacements">A map of the expected parameters and their replacements.</param>
     internal ParameterRebinder(Dictionary<ParameterExpression, ParameterExpression> parametersAndReplacements)

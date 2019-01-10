@@ -24,7 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-namespace CSF.Data.Specifications
+namespace CSF.Specifications
 {
   /// <summary>
   /// A type which acts as a specification, and may be used to test object instances to determine whether or not they

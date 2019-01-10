@@ -27,7 +27,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CSF.Data.Specifications
+namespace CSF.Specifications
 {
   /// <summary>
   /// A class which contains a number of extension methods which relate to <see cref="ISpecification{T}"/> and

@@ -25,9 +25,9 @@
 // THE SOFTWARE.
 using System;
 using System.Linq.Expressions;
-using CSF.Data.Specifications;
+using CSF.Specifications;
 
-namespace Test.CSF.Data.Stubs
+namespace Test.CSF.Specifications.Stubs
 {
   public class PersonNameSpecificationExpression : SpecificationExpression<Person>
   {

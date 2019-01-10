@@ -26,7 +26,7 @@
 using System;
 using System.Linq;
 
-namespace CSF.Data.Specifications
+namespace CSF.Specifications
 {
   /// <summary>
   /// A generic implementation of <see cref="ISpecification"/>, which may additionally be used with an

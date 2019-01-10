@@ -27,7 +27,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace CSF.Data.Specifications
+namespace CSF.Specifications
 {
   /// <summary>
   /// Specialisation of an <see cref="ISpecification{T}" /> which uses a Linq predicate expression as its underlying

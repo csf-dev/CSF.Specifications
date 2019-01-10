@@ -1,5 +1,5 @@
 ﻿//
-// PredicateBuilder.cs
+// Predicate.cs
 //
 // Authors:
 //       Pete Montgomery https://petemontgomery.wordpress.com
@@ -29,7 +29,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace CSF.Data
+namespace CSF
 {
   /// <summary>
   /// Static helper type which provides functionality to compose and combine predicate expressions.

@@ -25,7 +25,7 @@
 // THE SOFTWARE.
 using System;
 
-namespace Test.CSF.Data.Stubs
+namespace Test.CSF.Specifications.Stubs
 {
   public class Person
   {

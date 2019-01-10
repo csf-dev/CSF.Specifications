@@ -25,11 +25,11 @@
 // THE SOFTWARE.
 using System;
 using System.Linq;
-using CSF.Data.Specifications;
+using CSF.Specifications;
 using NUnit.Framework;
-using Test.CSF.Data.Stubs;
+using Test.CSF.Specifications.Stubs;
 
-namespace Test.CSF.Data.Specifications
+namespace Test.CSF.Specifications
 {
   [TestFixture,Parallelizable]
   public class SpecificationExtensionsTests

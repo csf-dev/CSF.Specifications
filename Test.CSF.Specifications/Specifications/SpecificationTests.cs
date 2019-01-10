@@ -24,11 +24,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using CSF.Data.Specifications;
+using CSF.Specifications;
 using NUnit.Framework;
-using Test.CSF.Data.Stubs;
+using Test.CSF.Specifications.Stubs;
 
-namespace Test.CSF.Data.Specifications
+namespace Test.CSF.Specifications
 {
   [TestFixture,Parallelizable]
   public class SpecificationTests : SpecificationTestBase

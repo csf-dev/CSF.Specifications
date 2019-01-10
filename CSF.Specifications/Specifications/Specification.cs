@@ -26,7 +26,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace CSF.Data.Specifications
+namespace CSF.Specifications
 {
   /// <summary>
   /// Helper type for the creation of dynamic specifications from expressions.

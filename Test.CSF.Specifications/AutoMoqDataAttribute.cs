@@ -28,7 +28,7 @@ using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoMoq;
 using Ploeh.AutoFixture.NUnit3;
 
-namespace Test.CSF.Data
+namespace Test.CSF.Specifications
 {
   public class AutoMoqDataAttribute : AutoDataAttribute
   {
