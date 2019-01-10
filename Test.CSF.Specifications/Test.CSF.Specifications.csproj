@@ -71,7 +71,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\CSF.Data\CSF.Data.csproj">
+    <ProjectReference Include="..\CSF.Specifications\CSF.Specifications.csproj">
       <Project>{27BC821D-03D4-42A0-B379-F93D021E56EC}</Project>
       <Name>CSF.Specifications</Name>
     </ProjectReference>
