@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{27BC821D-03D4-42A0-B379-F93D021E56EC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>CSF.Data</RootNamespace>
+    <AssemblyName>CSF.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <ReleaseVersion>1.3.0</ReleaseVersion>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <DocumentationFile>bin\Debug\CSF.Data.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\Release\CSF.Data.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="IDbCommandExtensions.cs" />
+    <Compile Include="InMemoryDataReader.cs" />
+    <Compile Include="IQuery.cs" />
+    <Compile Include="InMemoryQuery.cs" />
+    <Compile Include="InMemoryItem.cs" />
+    <Compile Include="ITransactionCreator.cs" />
+    <Compile Include="ITransaction.cs" />
+    <Compile Include="NoOpTransaction.cs" />
+    <Compile Include="TransactionRollbackException.cs" />
+    <Compile Include="NoOpTransactionCreator.cs" />
+    <Compile Include="IPersister.cs" />
+    <Compile Include="InMemoryPersister.cs" />
+    <Compile Include="ParameterRebinder.cs" />
+    <Compile Include="Predicate.cs" />
+    <Compile Include="Specifications\ISpecification.cs" />
+    <Compile Include="Specifications\ISpecification`1.cs" />
+    <Compile Include="Specifications\ISpecificationExpression.cs" />
+    <Compile Include="Specifications\Specification`1.cs" />
+    <Compile Include="Specifications\SpecificationExpression.cs" />
+    <Compile Include="Specifications\DynamicSpecificationExpression.cs" />
+    <Compile Include="Specifications\SpecificationExtensions.cs" />
+    <Compile Include="Specifications\Specification.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CSF.Data.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Specifications\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
