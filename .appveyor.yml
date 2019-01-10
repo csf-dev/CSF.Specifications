@@ -1,6 +1,6 @@
 ﻿version: '{branch}-{build}'
 before_build:
-- cmd: nuget restore CSF.Data.sln
+- cmd: nuget restore CSF.Specifications.sln
 build:
   verbosity: minimal
 test:

@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.CSF.Data", "Test.CSF.Data\Test.CSF.Data.csproj", "{11DCF35A-6E2A-4C62-B536-14B83FF5AE07}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.CSF.Specifications", "Test.CSF.Specifications\Test.CSF.Specifications.csproj", "{11DCF35A-6E2A-4C62-B536-14B83FF5AE07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Data", "CSF.Data\CSF.Data.csproj", "{27BC821D-03D4-42A0-B379-F93D021E56EC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Specifications", "CSF.Specifications\CSF.Specifications.csproj", "{27BC821D-03D4-42A0-B379-F93D021E56EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
