@@ -75,7 +75,7 @@ namespace CSF.Specifications
     /// Gets a specification instance which is equivalent to the logical 'NOT' of the current specification instance.
     /// </summary>
     /// <returns>A specification which is the complement/logical 'NOT' of the current instance.</returns>
-    public ISpecificationExpression<T> Negate()
+    public virtual ISpecificationExpression<T> Negate()
     {
       var negatedExpression = GetExpression().Not();
       return Specification.Create(negatedExpression);
