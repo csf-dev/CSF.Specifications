@@ -7,8 +7,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{11DCF35A-6E2A-4C62-B536-14B83FF5AE07}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Test.CSF.Data</RootNamespace>
-    <AssemblyName>Test.CSF.Data</AssemblyName>
+    <RootNamespace>Test.CSF.Specifications</RootNamespace>
+    <AssemblyName>Test.CSF.Specifications</AssemblyName>
     <ReleaseVersion>1.3.0</ReleaseVersion>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
@@ -76,7 +76,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CSF.Data\CSF.Data.csproj">
       <Project>{27BC821D-03D4-42A0-B379-F93D021E56EC}</Project>
-      <Name>CSF.Data</Name>
+      <Name>CSF.Specifications</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

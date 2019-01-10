@@ -7,8 +7,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{27BC821D-03D4-42A0-B379-F93D021E56EC}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>CSF.Data</RootNamespace>
-    <AssemblyName>CSF.Data</AssemblyName>
+    <RootNamespace>CSF.Specifications</RootNamespace>
+    <AssemblyName>CSF.Specifications</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <ReleaseVersion>1.3.0</ReleaseVersion>
     <SignAssembly>true</SignAssembly>
@@ -24,7 +24,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <DocumentationFile>bin\Debug\CSF.Data.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\CSF.Specifications.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <DefineConstants>TRACE</DefineConstants>
-    <DocumentationFile>bin\Release\CSF.Data.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\CSF.Specifications.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -66,10 +66,10 @@
     <Compile Include="Specifications\Specification.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="CSF.Data.nuspec" />
+    <Folder Include="Specifications\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Specifications\" />
+    <None Include="CSF.Specifications.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
