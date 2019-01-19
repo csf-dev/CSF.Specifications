@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 using System;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 
 [assembly: CLSCompliant(true)]
 [assembly: AssemblyTitle("CSF.Specifications")]
@@ -40,5 +39,5 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyConfiguration("Release")]
 #endif
 
-[assembly: AssemblyVersion("0.1.0.0")]
+[assembly: AssemblyVersion("1.0.0.0")]
 
