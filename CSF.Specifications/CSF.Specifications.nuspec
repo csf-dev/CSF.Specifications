@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>CSF.Specifications</id>
+    <version>1.0.0</version>
+    <title>CSF.Specifications</title>
+    <authors>CSF Software Ltd</authors>
+    <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/csf-dev/CSF.Specifications</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Types for working with predicate expressions, including the specification pattern.</description>
+    <copyright>Copyright 2019</copyright>
+  </metadata>
+  <files>
+    <file src="bin/Release/CSF.Specifications.dll" target="lib/net45" />
+    <file src="bin/Release/CSF.Specifications.xml" target="lib/net45" />
+  </files>
+</package>
