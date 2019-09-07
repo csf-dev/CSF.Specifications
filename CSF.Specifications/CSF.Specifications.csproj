@@ -13,15 +13,16 @@
     <PackageProjectUrl>https://github.com/csf-dev/CSF.Specifications</PackageProjectUrl>
     <Title>CSF.Specifications</Title>
     <Description>Types for working with predicate expressions, including the specification pattern.</Description>
+    <Copyright>Copyright 2019</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DocumentationFile>bin\Debug\netstandard1.2\CSF.Specifications.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\netstandard1.0\CSF.Specifications.xml</DocumentationFile>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType></DebugType>
-    <DocumentationFile>bin\Release\netstandard1.2\CSF.Specifications.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\netstandard1.0\CSF.Specifications.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="NuGet.Build.Packaging" Version="0.2.0" />
