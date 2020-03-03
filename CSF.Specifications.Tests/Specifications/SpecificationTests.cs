@@ -1,5 +1,5 @@
 ﻿//
-// PersonNameSpecification.cs
+// SpecificationTests.cs
 //
 // Author:
 //       Craig Fowler <craig@csf-dev.com>
@@ -23,26 +23,17 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-using System;
-using System.Linq;
-using CSF.Specifications;
+using NUnit.Framework;
+using CSF.Specifications.Tests.Stubs;
 
-namespace Test.CSF.Specifications.Stubs
+namespace CSF.Specifications.Tests.Specifications
 {
-  public class PersonNameSpecification : Specification<Person>
+  [TestFixture,Parallelizable]
+  public class SpecificationTests : SpecificationTestBase
   {
-    readonly string name;
-
-		public override IQueryable<Person> ApplyTo(IQueryable<Person> query)
+		protected override ISpecification<Person> CreatePersonNameSpecification(string name)
 		{
-      return query.Where(x => x.Name == name);
+      return new PersonNameSpecification(name);
 		}
-
-		public PersonNameSpecification(string name)
-    {
-      if(name == null)
-        throw new ArgumentNullException(nameof(name));
-      this.name = name;
-    }
-  }
+	}
 }

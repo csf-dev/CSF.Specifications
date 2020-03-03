@@ -1,10 +1,10 @@
 ﻿//
-// PersonNameSpecification.cs
+// Employee.cs
 //
 // Author:
-//       Craig Fowler <craig@csf-dev.com>
+//       Craig Fowler <craig@craigfowler.me.uk>
 //
-// Copyright (c) 2018 Craig Fowler
+// Copyright (c) 2017 Craig Fowler
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,22 +24,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using System.Linq.Expressions;
-using CSF.Specifications;
 
-namespace Test.CSF.Specifications.Stubs
+namespace CSF.Specifications.Tests.Stubs
 {
-  public class PersonNameSpecificationExpression : SpecificationExpression<Person>
+  public class Employee : Person
   {
-    readonly string name;
-
-    public override Expression<Func<Person, bool>> GetExpression() => p => p.Name == name;
-
-		public PersonNameSpecificationExpression(string name)
-    {
-      if(name == null)
-        throw new ArgumentNullException(nameof(name));
-      this.name = name;
-    }
   }
 }
+

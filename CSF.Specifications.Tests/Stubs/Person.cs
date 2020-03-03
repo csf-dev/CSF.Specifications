@@ -1,10 +1,10 @@
 ﻿//
-// SpecificationTests.cs
+// Person.cs
 //
 // Author:
-//       Craig Fowler <craig@csf-dev.com>
+//       Craig Fowler <craig@craigfowler.me.uk>
 //
-// Copyright (c) 2018 Craig Fowler
+// Copyright (c) 2017 Craig Fowler
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,18 +24,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using CSF.Specifications;
-using NUnit.Framework;
-using Test.CSF.Specifications.Stubs;
 
-namespace Test.CSF.Specifications
+namespace CSF.Specifications.Tests.Stubs
 {
-  [TestFixture,Parallelizable]
-  public class SpecificationTests : SpecificationTestBase
+  public class Person
   {
-		protected override ISpecification<Person> CreatePersonNameSpecification(string name)
-		{
-      return new PersonNameSpecification(name);
-		}
-	}
+    public long Identity
+    {
+      get;
+      set;
+    }
+
+    public string Name
+    {
+      get;
+      set;
+    }
+  }
 }
+

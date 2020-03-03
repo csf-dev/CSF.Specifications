@@ -1,10 +1,10 @@
 ﻿//
-// Employee.cs
+// PersonIdentifierSpecificationExpression.cs
 //
 // Author:
-//       Craig Fowler <craig@craigfowler.me.uk>
+//       Craig Fowler <craig@csf-dev.com>
 //
-// Copyright (c) 2017 Craig Fowler
+// Copyright (c) 2018 Craig Fowler
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,11 +24,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+using System.Linq.Expressions;
+using CSF.Specifications;
 
-namespace Test.CSF.Specifications.Stubs
+namespace CSF.Specifications.Tests.Stubs
 {
-  public class Employee : Person
+  public class PersonIdentifierSpecificationExpression : SpecificationExpression<Person>
   {
+    readonly long identifier;
+
+    public override Expression<Func<Person, bool>> GetExpression() => p => p.Identity == identifier;
+
+    public PersonIdentifierSpecificationExpression(long identifier)
+    {
+      this.identifier = identifier;
+    }
   }
 }
-
