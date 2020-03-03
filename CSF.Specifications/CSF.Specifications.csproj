@@ -1,31 +1,35 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.0</TargetFramework>
-    <PackOnBuild>true</PackOnBuild>
-    <PackageVersion>1.1.0</PackageVersion>
-    <Authors>CSF Software Limited</Authors>
-    <ReleaseVersion>1.0.0</ReleaseVersion>
+    <TargetFrameworks>netstandard2.0;netstandard1.0;net45</TargetFrameworks>
+    
+    <PackageId>CSF.Specifications</PackageId>
+    <Authors>craigfowler</Authors>
+    <Title>Decorator builder: Interfaces</Title>
+    <Description>Types for working with predicate expressions, including the specification pattern.</Description>
+    <ReleaseVersion>1.1.0</ReleaseVersion>
+    <Version>$(ReleaseVersion)</Version>
+    <PackageVersion>$(ReleaseVersion)</PackageVersion>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Copyright 2020 - CSF Software Limited</Copyright>
+    <PackageProjectUrl>https://github.com/csf-dev/CSF.Specifications</PackageProjectUrl>
+    <RepositoryUrl>$(PackageProjectUrl)</RepositoryUrl>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
-    <PackageId>CSF.Specifications</PackageId>
-    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/csf-dev/CSF.Specifications</PackageProjectUrl>
-    <Title>CSF.Specifications</Title>
-    <Description>Types for working with predicate expressions, including the specification pattern.</Description>
-    <Copyright>Copyright 2019</Copyright>
+    <RootNamespace>CSF</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DocumentationFile>bin\Debug\netstandard1.0\CSF.Specifications.xml</DocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\CSF.Specifications.xml</DocumentationFile>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType></DebugType>
-    <DocumentationFile>bin\Release\netstandard1.0\CSF.Specifications.xml</DocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\CSF.Specifications.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.0" />
-    <PackageReference Include="System.Linq.Queryable" Version="4.3.0" />
+    <PackageReference Include="System.Linq.Queryable" Version="4.3.0" Condition="$(TargetFramework) == 'netstandard1.0'" />
   </ItemGroup>
+    
+  <Import Project="..\Tools\EnableNet45BuildOnUnix.targets" />
 </Project>
