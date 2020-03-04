@@ -1,10 +1,10 @@
 ﻿//
-// Animal.cs
+// PersonNameSpecification.cs
 //
 // Author:
 //       Craig Fowler <craig@csf-dev.com>
 //
-// Copyright (c) 2017 Craig Fowler
+// Copyright (c) 2018 Craig Fowler
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,20 +24,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+using System.Linq;
+using CSF.Specifications;
+
 namespace CSF.Specifications.Tests.Stubs
 {
-  public class Animal
-  {
-    public long Identity
+    public class PersonNameSpecificationFunction : ISpecificationFunction<Person>
     {
-      get;
-      set;
-    }
+        readonly string name;
 
-    public string Name
-    {
-      get;
-      set;
+        public Func<Person, bool> GetFunction() => x => x.Name == name;
+
+        public PersonNameSpecificationFunction(string name)
+        {
+            if (name == null)
+                throw new ArgumentNullException(nameof(name));
+            this.name = name;
+        }
     }
-  }
 }

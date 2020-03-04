@@ -29,11 +29,11 @@ using CSF.Specifications;
 
 namespace CSF.Specifications.Tests.Stubs
 {
-  public class PersonIdentifierSpecificationExpression : SpecificationExpression<Person>
+  public class PersonIdentifierSpecificationExpression : ISpecificationExpression<Person>
   {
     readonly long identifier;
 
-    public override Expression<Func<Person, bool>> GetExpression() => p => p.Identity == identifier;
+    public Expression<Func<Person, bool>> GetExpression() => p => p.Identity == identifier;
 
     public PersonIdentifierSpecificationExpression(long identifier)
     {

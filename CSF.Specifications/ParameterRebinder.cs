@@ -29,39 +29,39 @@ using System.Linq.Expressions;
 
 namespace CSF
 {
-  /// <summary>
-  /// Implementation of <c>ExpressionVisitor</c> which alters the parameters of an expression and re-binds them using a
-  /// set of replacement parameters.
-  /// </summary>
-  class ParameterRebinder : ExpressionVisitor
-  {
-    readonly Dictionary<ParameterExpression, ParameterExpression> parametersAndReplacements;
-
     /// <summary>
-    /// Visits a parameter of the visited expression and replaces it with a corresponding parameter from the
-    /// replacement list (if the parameter is indicated for replacement).
+    /// Implementation of <c>ExpressionVisitor</c> which alters the parameters of an expression and re-binds them using a
+    /// set of replacement parameters.
     /// </summary>
-    /// <returns>The parameter, or its replacement.</returns>
-    /// <param name="parameter">The visited parameter.</param>
-    protected override Expression VisitParameter(ParameterExpression parameter)
+    class ParameterRebinder : ExpressionVisitor
     {
-      ParameterExpression replacement;
+        readonly Dictionary<ParameterExpression, ParameterExpression> parametersAndReplacements;
 
-      if(parametersAndReplacements.TryGetValue(parameter, out replacement))
-      {
-        parameter = replacement;
-      }
+        /// <summary>
+        /// Visits a parameter of the visited expression and replaces it with a corresponding parameter from the
+        /// replacement list (if the parameter is indicated for replacement).
+        /// </summary>
+        /// <returns>The parameter, or its replacement.</returns>
+        /// <param name="parameter">The visited parameter.</param>
+        protected override Expression VisitParameter(ParameterExpression parameter)
+        {
+            ParameterExpression replacement;
 
-      return base.VisitParameter(parameter);
+            if (parametersAndReplacements.TryGetValue(parameter, out replacement))
+            {
+                parameter = replacement;
+            }
+
+            return base.VisitParameter(parameter);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ParameterRebinder"/> class.
+        /// </summary>
+        /// <param name="parametersAndReplacements">A map of the expected parameters and their replacements.</param>
+        internal ParameterRebinder(Dictionary<ParameterExpression, ParameterExpression> parametersAndReplacements)
+        {
+            this.parametersAndReplacements = parametersAndReplacements ?? new Dictionary<ParameterExpression, ParameterExpression>();
+        }
     }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="T:CSF.ParameterRebinder"/> class.
-    /// </summary>
-    /// <param name="parametersAndReplacements">A map of the expected parameters and their replacements.</param>
-    internal ParameterRebinder(Dictionary<ParameterExpression, ParameterExpression> parametersAndReplacements)
-    {
-      this.parametersAndReplacements = parametersAndReplacements ?? new Dictionary<ParameterExpression, ParameterExpression>();
-    }
-  }
 }

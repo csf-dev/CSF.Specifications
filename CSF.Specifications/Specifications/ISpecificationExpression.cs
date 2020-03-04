@@ -29,29 +29,31 @@ using System.Linq.Expressions;
 
 namespace CSF.Specifications
 {
-  /// <summary>
-  /// Specialisation of an <see cref="ISpecification{T}" /> which uses a Linq predicate expression as its underlying
-  /// source of logic.
-  /// </summary>
-  public interface ISpecificationExpression<T> : ISpecification<T>
-  {
     /// <summary>
-    /// Gets the expression which is encapsulated by the current specification instance.
+    /// A specification object is a wrapper for a predicate expression.
     /// </summary>
-    /// <returns>The expression.</returns>
-    Expression<Func<T,bool>> GetExpression();
-
-    /// <summary>
-    /// Gets a <c>Predicate&lt;T&gt;</c> instance which is equivalent to the expression which is encapsulated by
-    /// the current specification instance.
-    /// </summary>
-    /// <returns>A predicate equivalent to the current specification.</returns>
-    Predicate<T> AsPredicate();
-
-    /// <summary>
-    /// Gets a specification instance which is equivalent to the logical 'NOT' of the current specification instance.
-    /// </summary>
-    /// <returns>A specification which is the complement/logical 'NOT' of the current instance.</returns>
-    ISpecificationExpression<T> Negate();
-  }
+    /// <remarks>
+    /// <para>
+    /// A specification expression contains predicate logic which determines
+    /// whether or not an object matches that predicate or not. A specification
+    /// expression is limited only to logic which may be represented via a
+    /// <c>System.Linq.Expressions.Expression</c>, and may not include completely
+    /// arbitrary logic.
+    /// </para>
+    /// <para>
+    /// Where possible, prefer using specification expressions.  Specification
+    /// expression may be used everywhere where specification functions -
+    /// <see cref="ISpecificationFunction{T}"/> - can be used, but ALSO in places
+    /// where an <c>Expression&lt;Func&lt;T,bool&gt;&gt;</c> is required.  This
+    /// includes using them with <c>IQueryable&lt;T&gt;</c>.
+    /// </para>
+    /// </remarks>
+    public interface ISpecificationExpression<T>
+    {
+        /// <summary>
+        /// Gets the predicate function provided by the current specification instance.
+        /// </summary>
+        /// <returns>A predicate function</returns>
+        Expression<Func<T, bool>> GetExpression();
+    }
 }

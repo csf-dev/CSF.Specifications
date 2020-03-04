@@ -1,5 +1,5 @@
 ﻿//
-// DynamicSpecificationExpression.cs
+// ISpecification`1.cs
 //
 // Author:
 //       Craig Fowler <craig@csf-dev.com>
@@ -24,40 +24,29 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using System.Linq.Expressions;
 
 namespace CSF.Specifications
 {
-  /// <summary>
-  /// Implementation of a <see cref="SpecificationExpression{T}"/> which makes use of a dynamic expression instance
-  /// passed via the constructor.
-  /// </summary>
-  /// <remarks>
-  /// <para>
-  /// This is not intended to be used directly by client code; in those cases prefer instead creating explicit named
-  /// specification expression classes.
-  /// </para>
-  /// </remarks>
-  public class DynamicSpecificationExpression<T> : SpecificationExpression<T>
-  {
-    readonly Expression<Func<T, bool>> expression;
-
     /// <summary>
-    /// Gets the expression which is encapsulated by the current specification instance.
+    /// A specification object is a wrapper for a predicate function.
     /// </summary>
-    /// <returns>The expression.</returns>
-    public override Expression<Func<T, bool>> GetExpression() => expression;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="DynamicSpecificationExpression{T}"/> class.
-    /// </summary>
-    /// <param name="expression">Expression.</param>
-    public DynamicSpecificationExpression(Expression<Func<T, bool>> expression)
+    /// <remarks>
+    /// <para>
+    /// A specification function may contain arbitrary predicate logic to determine
+    /// whether or not an object matches that predicate or not.
+    /// </para>
+    /// <para>
+    /// Where possible, prefer using specification expressions - <see cref="ISpecificationExpression{T}"/> -
+    /// instead of specification functions.  Specification functions CANNOT BE USED where an
+    /// <c>Expression&lt;Func&lt;T,bool&gt;&gt;</c> is required, for example with <c>IQueryable&lt;T&gt;</c>.
+    /// </para>
+    /// </remarks>
+    public interface ISpecificationFunction<T>
     {
-      if(expression == null)
-        throw new ArgumentNullException(nameof(expression));
-
-      this.expression = expression;
+        /// <summary>
+        /// Gets the predicate function provided by the current specification instance.
+        /// </summary>
+        /// <returns>A predicate function</returns>
+        Func<T, bool> GetFunction();
     }
-  }
 }

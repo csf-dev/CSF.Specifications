@@ -29,17 +29,17 @@ using CSF.Specifications;
 
 namespace CSF.Specifications.Tests.Stubs
 {
-  public class PersonNameSpecificationExpression : SpecificationExpression<Person>
-  {
-    readonly string name;
-
-    public override Expression<Func<Person, bool>> GetExpression() => p => p.Name == name;
-
-		public PersonNameSpecificationExpression(string name)
+    public class PersonNameSpecificationExpression : ISpecificationExpression<Person>
     {
-      if(name == null)
-        throw new ArgumentNullException(nameof(name));
-      this.name = name;
+        readonly string name;
+
+        public Expression<Func<Person, bool>> GetExpression() => p => p.Name == name;
+
+        public PersonNameSpecificationExpression(string name)
+        {
+            if (name == null)
+                throw new ArgumentNullException(nameof(name));
+            this.name = name;
+        }
     }
-  }
 }
