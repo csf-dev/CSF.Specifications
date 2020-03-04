@@ -5,9 +5,8 @@
     
     <PackageId>CSF.Specifications</PackageId>
     <Authors>craigfowler</Authors>
-    <Title>Decorator builder: Interfaces</Title>
     <Description>Types for working with predicate expressions, including the specification pattern.</Description>
-    <ReleaseVersion>1.1.0</ReleaseVersion>
+    <ReleaseVersion>1.2.0</ReleaseVersion>
     <Version>$(ReleaseVersion)</Version>
     <PackageVersion>$(ReleaseVersion)</PackageVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

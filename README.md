@@ -97,9 +97,6 @@ public class DeliveryIsLateAndIncludesHighValueGoods : SpecificationExpression<D
 }
 ```
 
-## Full documentation
-Full documentation for the specification API can be found on [the project wiki].
-
 ## Open source license
 All source files within this project are released as open source software,
 under the terms of [the MIT license].
