@@ -47,12 +47,10 @@ namespace CSF
         {
             ParameterExpression replacement;
 
-            if (parametersAndReplacements.TryGetValue(parameter, out replacement))
-            {
-                parameter = replacement;
-            }
+            if (parametersAndReplacements.TryGetValue(node, out replacement))
+                node = replacement;
 
-            return base.VisitParameter(parameter);
+            return base.VisitParameter(node);
         }
 
         /// <summary>
