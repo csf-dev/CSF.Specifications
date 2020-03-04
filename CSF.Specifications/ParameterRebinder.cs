@@ -42,7 +42,7 @@ namespace CSF
         /// replacement list (if the parameter is indicated for replacement).
         /// </summary>
         /// <returns>The parameter, or its replacement.</returns>
-        /// <param name="parameter">The visited parameter.</param>
+        /// <param name="node">The visited parameter.</param>
         protected override Expression VisitParameter(ParameterExpression node)
         {
             ParameterExpression replacement;
