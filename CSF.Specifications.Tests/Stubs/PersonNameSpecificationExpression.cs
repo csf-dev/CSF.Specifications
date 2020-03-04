@@ -1,10 +1,10 @@
 ﻿//
-// Animal.cs
+// PersonNameSpecification.cs
 //
 // Author:
 //       Craig Fowler <craig@csf-dev.com>
 //
-// Copyright (c) 2017 Craig Fowler
+// Copyright (c) 2018 Craig Fowler
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,20 +24,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-namespace Test.CSF.Specifications.Stubs
-{
-  public class Animal
-  {
-    public long Identity
-    {
-      get;
-      set;
-    }
+using System.Linq.Expressions;
+using CSF.Specifications;
 
-    public string Name
+namespace CSF.Specifications.Tests.Stubs
+{
+  public class PersonNameSpecificationExpression : SpecificationExpression<Person>
+  {
+    readonly string name;
+
+    public override Expression<Func<Person, bool>> GetExpression() => p => p.Name == name;
+
+		public PersonNameSpecificationExpression(string name)
     {
-      get;
-      set;
+      if(name == null)
+        throw new ArgumentNullException(nameof(name));
+      this.name = name;
     }
   }
 }

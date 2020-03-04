@@ -26,9 +26,9 @@
 using System;
 using CSF;
 using NUnit.Framework;
-using Test.CSF.Specifications.Stubs;
+using CSF.Specifications.Tests.Stubs;
 
-namespace Test.CSF.Specifications
+namespace CSF.Specifications.Tests
 {
   [TestFixture,Parallelizable]
   public class PredicateTests
