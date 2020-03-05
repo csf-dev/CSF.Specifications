@@ -27,19 +27,19 @@ using System;
 
 namespace CSF.Specifications.Tests.Stubs
 {
-  public class Person
-  {
-    public long Identity
+    public class Person
     {
-      get;
-      set;
-    }
+        public long Identity
+        {
+            get;
+            set;
+        }
 
-    public string Name
-    {
-      get;
-      set;
+        public string Name
+        {
+            get;
+            set;
+        }
     }
-  }
 }
 

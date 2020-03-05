@@ -30,5 +30,8 @@
     <PackageReference Include="System.Linq.Queryable" Version="4.3.0" Condition="$(TargetFramework) == 'netstandard1.0'" />
   </ItemGroup>
     
+  <ItemGroup>
+    <Compile Remove="Specifications\Specification.cs" />
+  </ItemGroup>
   <Import Project="..\Tools\EnableNet45BuildOnUnix.targets" />
 </Project>

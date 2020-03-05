@@ -30,7 +30,7 @@ using System.Linq;
 namespace CSF.Specifications.Tests.Specifications
 {
     [TestFixture, Parallelizable]
-    public class SpecificationExpressionTests
+    public class SpecificationFunctionTests
     {
         [Test, AutoMoqData]
         public void AsPredicate_returns_predicate_which_matches_a_matching_object(Person person)
@@ -134,7 +134,7 @@ namespace CSF.Specifications.Tests.Specifications
 
             var combinedSpec = firstSpec.And(secondSpec);
 
-            var people = new[] { personOne, personTwo, personThree }.AsQueryable();
+            var people = new[] { personOne, personTwo, personThree };
 
             var result = people.Where(combinedSpec).ToArray();
 
@@ -159,7 +159,7 @@ namespace CSF.Specifications.Tests.Specifications
 
             var combinedSpec = firstSpec.Or(secondSpec);
 
-            var people = new[] { personOne, personTwo, personThree }.AsQueryable();
+            var people = new[] { personOne, personTwo, personThree };
 
             // Act
             var result = people.Where(combinedSpec).ToArray();
@@ -168,6 +168,6 @@ namespace CSF.Specifications.Tests.Specifications
             Assert.That(result, Is.EquivalentTo(new[] { personTwo, personThree }));
         }
 
-        ISpecificationExpression<Person> GetSut(string name) => new PersonNameSpecificationExpression(name);
+        ISpecificationFunction<Person> GetSut(string name) => new PersonNameSpecificationFunction(name);
     }
 }
