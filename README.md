@@ -1,5 +1,5 @@
 # The specification pattern
-This library presents an implementation of **[the specification pattern]**, inspired loosely by
+This library presents an implementation of **[the specification pattern]**, originally inspired by
 [the work by Vladimir Khorikov] and extended for compatibility with [the NHibernate ORM]
 based upon [this article by Pete Montgomery].
 
@@ -100,7 +100,7 @@ public class DeliveryIsLateAndIncludesHighValueGoods : ISpecificationExpression<
 ```
 
 ## Full documentation
-For full documentation on using this library, please [read the wiki for this repository].
+For full documentation, please [read the wiki for this repository].
 
 ## Open source license
 All source files within this project are released as open source software,
