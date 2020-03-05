@@ -86,6 +86,21 @@ namespace CSF.Specifications
         }
 
         /// <summary>
+        /// Gets a new specification function which corresponds to the logical
+        /// combination of the specified objects: <c>AND</c>.
+        /// </summary>
+        /// <returns>A specification function.</returns>
+        /// <param name="spec">A specification expression.</param>
+        /// <param name="composeWith">A specification function.</param>
+        /// <typeparam name="T">The generic type of the specifications.</typeparam>
+        public static ISpecificationFunction<T> And<T>(this ISpecificationExpression<T> spec, ISpecificationFunction<T> composeWith)
+        {
+            var func1 = spec.GetFunction();
+            var func2 = composeWith.GetFunction();
+            return Spec.Func<T>(o => func1(o) && func2(o));
+        }
+
+        /// <summary>
         /// Gets a new specification expression which corresponds to the logical
         /// alternation of the specified objects: <c>OR</c>.
         /// </summary>
@@ -98,6 +113,21 @@ namespace CSF.Specifications
             var func1 = spec.GetExpressionOrThrow();
             var func2 = composeWith.GetExpressionOrThrow();
             return Spec.Expr(func1.Or(func2));
+        }
+
+        /// <summary>
+        /// Gets a new specification function which corresponds to the logical
+        /// alternation of the specified objects: <c>OR</c>.
+        /// </summary>
+        /// <returns>A specification function.</returns>
+        /// <param name="spec">A specification expression.</param>
+        /// <param name="composeWith">A specification function.</param>
+        /// <typeparam name="T">The generic type of the specifications.</typeparam>
+        public static ISpecificationFunction<T> Or<T>(this ISpecificationExpression<T> spec, ISpecificationFunction<T> composeWith)
+        {
+            var func1 = spec.GetFunction();
+            var func2 = composeWith.GetFunction();
+            return Spec.Func<T>(o => func1(o) || func2(o));
         }
 
         /// <summary>

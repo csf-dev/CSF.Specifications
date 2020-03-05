@@ -83,6 +83,21 @@ namespace CSF.Specifications
             var func2 = GetFunction(composeWith);
             return Spec.Func<T>(o => func1(o) && func2(o));
         }
+        
+        /// <summary>
+        /// Gets a new specification function which corresponds to the logical
+        /// combination of the specified objects: <c>AND</c>.
+        /// </summary>
+        /// <returns>A specification function.</returns>
+        /// <param name="spec">A specification function.</param>
+        /// <param name="composeWith">A specification expression.</param>
+        /// <typeparam name="T">The generic type of the specifications.</typeparam>
+        public static ISpecificationFunction<T> And<T>(this ISpecificationFunction<T> spec, ISpecificationExpression<T> composeWith)
+        {
+            var func1 = GetFunction(spec);
+            var func2 = composeWith.GetFunction();
+            return Spec.Func<T>(o => func1(o) && func2(o));
+        }
 
         /// <summary>
         /// Gets a new specification function which corresponds to the logical
@@ -96,6 +111,21 @@ namespace CSF.Specifications
         {
             var func1 = GetFunction(spec);
             var func2 = GetFunction(composeWith);
+            return Spec.Func<T>(o => func1(o) || func2(o));
+        }
+
+        /// <summary>
+        /// Gets a new specification function which corresponds to the logical
+        /// alternation of the specified objects: <c>OR</c>.
+        /// </summary>
+        /// <returns>A specification function.</returns>
+        /// <param name="spec">A specification function.</param>
+        /// <param name="composeWith">A specification expression.</param>
+        /// <typeparam name="T">The generic type of the specifications.</typeparam>
+        public static ISpecificationFunction<T> Or<T>(this ISpecificationFunction<T> spec, ISpecificationExpression<T> composeWith)
+        {
+            var func1 = GetFunction(spec);
+            var func2 = composeWith.GetFunction();
             return Spec.Func<T>(o => func1(o) || func2(o));
         }
 
