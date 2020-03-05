@@ -28,27 +28,34 @@ using System.Linq.Expressions;
 
 namespace CSF.Specifications
 {
-  /// <summary>
-  /// Helper type for the creation of dynamic specifications from expressions.
-  /// </summary>
-  public static class Specification
-  {
     /// <summary>
-    /// Creates a new dynamic specification from a given expression.
+    /// Static factory class used to spawn dynamic specification objects.
     /// </summary>
     /// <remarks>
     /// <para>
-    /// This is intended for use when creating specifications dynamically, such as when composing/combining other
-    /// expressions.  It is not designed for use as the main mechanism of creating first-class specifications.
-    /// For that purpose, create an explicit specification implementation which encapsulates your logic within a class.
+    /// Often, creating specification objects this way isn't such a good
+    /// idea.  It would be better to encapsulate the logic within a class
+    /// which may be reused.
     /// </para>
     /// </remarks>
-    /// <returns>A specification instance.</returns>
-    /// <param name="expression">The expression which represents the specification.</param>
-    /// <typeparam name="T">The type of object to which the specification applies.</typeparam>
-    public static ISpecificationExpression<T> Create<T>(Expression<Func<T,bool>> expression)
+    public static class Spec
     {
-      return new DynamicSpecificationExpression<T>(expression);
+        /// <summary>
+        /// Creates a specification function from a predicate function.
+        /// </summary>
+        /// <returns>The specification function.</returns>
+        /// <param name="function">An arbitrary predicate function.</param>
+        /// <typeparam name="T">The type of object tested by the predicate.</typeparam>
+        public static ISpecificationFunction<T> Func<T>(Func<T, bool> function)
+            => new DynamicSpecFunction<T>(function ?? throw new ArgumentNullException(nameof(function)));
+
+        /// <summary>
+        /// Creates a dynamic specification expression from a predicate expression.
+        /// </summary>
+        /// <returns>The specification expression.</returns>
+        /// <param name="expression">A predicate expression.</param>
+        /// <typeparam name="T">The type of object tested by the predicate.</typeparam>
+        public static ISpecificationExpression<T> Expr<T>(Expression<Func<T, bool>> expression)
+            => new DynamicSpecExpression<T>(expression ?? throw new ArgumentNullException(nameof(expression)));
     }
-  }
 }

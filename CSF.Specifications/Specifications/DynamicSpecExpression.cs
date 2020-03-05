@@ -1,5 +1,5 @@
 ﻿//
-// SpecificationTests.cs
+// DynamicSpecificationExpression.cs
 //
 // Author:
 //       Craig Fowler <craig@csf-dev.com>
@@ -23,17 +23,24 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-using NUnit.Framework;
-using CSF.Specifications.Tests.Stubs;
+using System;
+using System.Linq.Expressions;
 
-namespace CSF.Specifications.Tests.Specifications
+namespace CSF.Specifications
 {
-  [TestFixture,Parallelizable]
-  public class SpecificationTests : SpecificationTestBase
-  {
-		protected override ISpecification<Person> CreatePersonNameSpecification(string name)
-		{
-      return new PersonNameSpecification(name);
-		}
-	}
+    /// <summary>
+    /// A dynamic specification expression which uses an arbitrary expression.
+    /// Likely, either it was created that way or it composes other expressions.
+    /// </summary>
+    class DynamicSpecExpression<T> : ISpecificationExpression<T>
+    {
+        readonly Expression<Func<T, bool>> expression;
+
+        public Expression<Func<T, bool>> GetExpression() => expression;
+
+        internal DynamicSpecExpression(Expression<Func<T, bool>> expression)
+        {
+            this.expression = expression ?? throw new ArgumentNullException(nameof(expression));
+        }
+    }
 }

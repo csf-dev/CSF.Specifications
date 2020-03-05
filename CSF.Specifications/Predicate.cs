@@ -31,122 +31,125 @@ using System.Linq.Expressions;
 
 namespace CSF
 {
-  /// <summary>
-  /// Static helper type which provides functionality to compose and combine predicate expressions.
-  /// </summary>
-  /// <remarks>
-  /// <para>
-  /// The original source of this work is https://petemontgomery.wordpress.com/2011/02/10/a-universal-predicatebuilder/
-  /// </para>
-  /// <para>
-  /// Some (largely cosmetic) modifications have been made afterwards.
-  /// </para>
-  /// </remarks>
-  public static class Predicate
-  {
     /// <summary>
-    /// Gets a predicate expression which always evaluates to true.
-    /// </summary>
-    public static Expression<Func<T, bool>> True<T>() { return param => true; }
-
-    /// <summary>
-    /// Gets a predicate expression which always evaluates to false.
-    /// </summary>
-    public static Expression<Func<T, bool>> False<T>() { return param => false; }
-
-    /// <summary>
-    /// Convenience method to create an expression instance from an expression lambda.
+    /// Helper type facilitating the creation, composition &amp; combination of
+    /// expressions which represent predicates: <c>Expression&lt;Func&lt;T, bool&gt;&gt;</c>.
     /// </summary>
     /// <remarks>
     /// <para>
-    /// The only real reason for this is so that client code can avoid unwanted explicit typing or casting in order
-    /// to create expression instances from shorthand lambdas.  Compare the two following examples:
-    /// </para>
-    /// <code>
-    /// // Explicit type
-    /// Expression&lt;Func&lt;MyObject, bool&gt;&gt; expression = obj =&gt; obj.HowMany &gt; 3;
-    /// 
-    /// // Implied type
-    /// var expression = Predicate.Create&lt;MyObject&gt;(obj =&gt; obj.HowMany &gt; 3);
-    /// </code>
-    /// <para>
-    /// The implied type is more suited to intellisense and other autocomplete features of IDEs.
+    /// This class is primarily based upon the work at
+    /// https://petemontgomery.wordpress.com/2011/02/10/a-universal-predicatebuilder/
+    /// with just a few (largely cosmetic) modifications.
     /// </para>
     /// </remarks>
-    /// <returns>The expression instance.</returns>
-    /// <param name="expression">An expression, typically a shorthand.</param>
-    /// <typeparam name="T">The 1st type parameter.</typeparam>
-    public static Expression<Func<T, bool>> Create<T>(Expression<Func<T, bool>> expression) => expression;
-
-    /// <summary>
-    /// Extension method which combines the two expressions using a logical 'AND'.
-    /// </summary>
-    public static Expression<Func<T, bool>> And<T>(this Expression<Func<T, bool>> first,
-                                                   Expression<Func<T, bool>> second)
+    public static class Predicate
     {
-      return Compose(first, second, Expression.AndAlso);
-    }
+        /// <summary>
+        /// Gets a predicate expression which always evaluates to true.
+        /// </summary>
+        public static Expression<Func<T, bool>> True<T>() { return param => true; }
 
-    /// <summary>
-    /// Extension method which combines the two expressions using a logical 'OR'.
-    /// </summary>
-    public static Expression<Func<T, bool>> Or<T>(this Expression<Func<T, bool>> first,
+        /// <summary>
+        /// Gets a predicate expression which always evaluates to false.
+        /// </summary>
+        public static Expression<Func<T, bool>> False<T>() { return param => false; }
+
+        /// <summary>
+        /// Gets an expression instance.
+        /// </summary>
+        /// <remarks>
+        /// <para>
+        /// The only real reason for this is so that client code can avoid unwanted explicit typing or casting in order
+        /// to create expression instances from shorthand lambdas.  Compare the two following examples:
+        /// </para>
+        /// <code>
+        /// // Explicit type
+        /// Expression&lt;Func&lt;MyObject, bool&gt;&gt; expression = obj =&gt; obj.HowMany &gt; 3;
+        /// 
+        /// // Implied type
+        /// var expression = Predicate.Create&lt;MyObject&gt;(obj =&gt; obj.HowMany &gt; 3);
+        /// </code>
+        /// <para>
+        /// The implied type is more suited to intellisense and other autocomplete features of IDEs.
+        /// </para>
+        /// </remarks>
+        /// <returns>The expression instance.</returns>
+        /// <param name="expression">An expression, typically a shorthand.</param>
+        /// <typeparam name="T">The 1st type parameter.</typeparam>
+        public static Expression<Func<T, bool>> Create<T>(Expression<Func<T, bool>> expression) => expression;
+
+        /// <summary>
+        /// Gets an expression which is the logical combination of two specified expressions: <c>AND</c>
+        /// </summary>
+        public static Expression<Func<T, bool>> And<T>(this Expression<Func<T, bool>> first,
+                                                       Expression<Func<T, bool>> second)
+        {
+            return Compose(first, second, Expression.AndAlso);
+        }
+
+        /// <summary>
+        /// Gets an expression which is the logical alternation of two specified expressions: <c>OR</c>
+        /// </summary>
+        public static Expression<Func<T, bool>> Or<T>(this Expression<Func<T, bool>> first,
                                                   Expression<Func<T, bool>> second)
-    {
-      return Compose(first, second, Expression.OrElse);
-    }
+        {
+            return Compose(first, second, Expression.OrElse);
+        }
 
-    /// <summary>
-    /// Extension method which negates the given predicate; a logical 'NOT'.
-    /// </summary>
-    public static Expression<Func<T, bool>> Not<T>(this Expression<Func<T, bool>> expression)
-    {
-      var negated = Expression.Not(expression.Body);
-      return Expression.Lambda<Func<T, bool>>(negated, expression.Parameters);
-    }
+        /// <summary>
+        /// Gets an expression which is the logical negation of the specified expression: <c>NOT</c>
+        /// </summary>
+        public static Expression<Func<T, bool>> Not<T>(this Expression<Func<T, bool>> expression)
+        {
+            var negated = Expression.Not(expression.Body);
+            return Expression.Lambda<Func<T, bool>>(negated, expression.Parameters);
+        }
 
-    /// <summary>
-    /// Combines the first expression with the second using the given composition function.
-    /// </summary>
-    public static Expression<T> Compose<T>(Expression<T> firstExpression,
-                                           Expression<T> secondExpression,
-                                           Func<Expression, Expression, Expression> compositionFunction)
-    {
-      var mappedParameters = MapExpressionParameters(firstExpression, secondExpression);
-      var bodyOfSecondExpressionWithReplacedParams = ReplaceParameters(mappedParameters, secondExpression.Body);
-      return ComposeExpressionBodies(firstExpression,
-                                     bodyOfSecondExpressionWithReplacedParams,
-                                     compositionFunction);
-    }
+        /// <summary>
+        /// Gets an expression which composes two expressions using a specified composition function.
+        /// </summary>
+        /// <param name="firstExpression">The expression to compose with the second.</param>
+        /// <param name="secondExpression">The expression to compose with the first.</param>
+        /// <param name="compositionFunction">An arbitrary expression-composition function.</param>
+        public static Expression<T> Compose<T>(Expression<T> firstExpression,
+                                               Expression<T> secondExpression,
+                                               Func<Expression, Expression, Expression> compositionFunction)
+        {
+            var mappedParameters = MapExpressionParameters(firstExpression, secondExpression);
+            var bodyOfSecondExpressionWithReplacedParams = ReplaceParameters(mappedParameters, secondExpression.Body);
+            return ComposeExpressionBodies(firstExpression,
+                                           bodyOfSecondExpressionWithReplacedParams,
+                                           compositionFunction);
+        }
 
-    static Expression<T> ComposeExpressionBodies<T>(Expression<T> firstExpression,
-                                                    Expression secondExpressionBody,
-                                                    Func<Expression, Expression, Expression> compositionFunction)
-    {
-      var composedBody = compositionFunction(firstExpression.Body, secondExpressionBody);
-      return Expression.Lambda<T>(composedBody, firstExpression.Parameters);
-    }
+        static Expression<T> ComposeExpressionBodies<T>(Expression<T> firstExpression,
+                                                        Expression secondExpressionBody,
+                                                        Func<Expression, Expression, Expression> compositionFunction)
+        {
+            var composedBody = compositionFunction(firstExpression.Body, secondExpressionBody);
+            return Expression.Lambda<T>(composedBody, firstExpression.Parameters);
+        }
 
-    static Expression ReplaceParameters(Dictionary<ParameterExpression, ParameterExpression> replacementParams,
-                                        Expression sourceExpression)
-    {
-      return new ParameterRebinder(replacementParams).Visit(sourceExpression);
-    }
+        static Expression ReplaceParameters(Dictionary<ParameterExpression, ParameterExpression> replacementParams,
+                                            Expression sourceExpression)
+        {
+            return new ParameterRebinder(replacementParams).Visit(sourceExpression);
+        }
 
-    static Dictionary<ParameterExpression, ParameterExpression> MapExpressionParameters<T>(Expression<T> first,
-                                                                                           Expression<T> second)
-    {
-      if(first == null)
-        throw new ArgumentNullException(nameof(first));
-      if(second == null)
-        throw new ArgumentNullException(nameof(second));
-      if(first.Parameters.Count != second.Parameters.Count)
-        throw new ArgumentException("First and second expressions must have identical parameter counts.");
+        static Dictionary<ParameterExpression, ParameterExpression> MapExpressionParameters<T>(Expression<T> first,
+                                                                                               Expression<T> second)
+        {
+            if (first == null)
+                throw new ArgumentNullException(nameof(first));
+            if (second == null)
+                throw new ArgumentNullException(nameof(second));
+            if (first.Parameters.Count != second.Parameters.Count)
+                throw new ArgumentException("First and second expressions must have identical parameter counts.");
 
-      return first
-        .Parameters
-        .Select((firstParam, idx) => new { firstParam, secondParam = second.Parameters[idx] })
-        .ToDictionary(k => k.secondParam, v => v.firstParam);
+            return first
+              .Parameters
+              .Select((firstParam, idx) => new { firstParam, secondParam = second.Parameters[idx] })
+              .ToDictionary(k => k.secondParam, v => v.firstParam);
+        }
     }
-  }
 }

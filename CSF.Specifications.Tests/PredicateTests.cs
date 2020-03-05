@@ -30,72 +30,72 @@ using CSF.Specifications.Tests.Stubs;
 
 namespace CSF.Specifications.Tests
 {
-  [TestFixture,Parallelizable]
-  public class PredicateTests
-  {
-    [Test,AutoMoqData]
-    public void And_creates_predicate_which_satisfies_both_predicates(Person personOne,
-                                                                      Person personTwo,
-                                                                      Person personThree)
+    [TestFixture, Parallelizable]
+    public class PredicateTests
     {
-      // Arrange
-      personOne.Name = "Billy";
-      personTwo.Name = "Bob";
-      personThree.Name = "Thornton";
+        [Test, AutoMoqData]
+        public void And_creates_predicate_which_satisfies_both_predicates(Person personOne,
+                                                                          Person personTwo,
+                                                                          Person personThree)
+        {
+            // Arrange
+            personOne.Name = "Billy";
+            personTwo.Name = "Bob";
+            personThree.Name = "Thornton";
 
-      var firstPredicate = Predicate.Create<Person>(p => p.Name.StartsWith("B", StringComparison.InvariantCulture));
-      var secondPredicate = Predicate.Create<Person>(p => p.Name.EndsWith("b", StringComparison.InvariantCulture));
+            var firstPredicate = Predicate.Create<Person>(p => p.Name.StartsWith("B", StringComparison.InvariantCulture));
+            var secondPredicate = Predicate.Create<Person>(p => p.Name.EndsWith("b", StringComparison.InvariantCulture));
 
-      // Act
-      var composedPredicate = firstPredicate.And(secondPredicate);
+            // Act
+            var composedPredicate = firstPredicate.And(secondPredicate);
 
-      // Assert
-      Assert.That(() => composedPredicate.Compile()(personOne), Is.False, "First person is not matched");
-      Assert.That(() => composedPredicate.Compile()(personTwo), Is.True, "Second person is matched");
-      Assert.That(() => composedPredicate.Compile()(personThree), Is.False, "Third person is not matched");
+            // Assert
+            Assert.That(() => composedPredicate.Compile()(personOne), Is.False, "First person is not matched");
+            Assert.That(() => composedPredicate.Compile()(personTwo), Is.True, "Second person is matched");
+            Assert.That(() => composedPredicate.Compile()(personThree), Is.False, "Third person is not matched");
+        }
+
+        [Test, AutoMoqData]
+        public void Or_creates_predicate_which_satisfies_both_predicates(Person personOne,
+                                                                         Person personTwo,
+                                                                         Person personThree)
+        {
+            // Arrange
+            personOne.Name = "Billy";
+            personTwo.Name = "Bob";
+            personThree.Name = "Thornton";
+
+            var firstPredicate = Predicate.Create<Person>(p => p.Name.EndsWith("y", StringComparison.InvariantCulture));
+            var secondPredicate = Predicate.Create<Person>(p => p.Name.EndsWith("n", StringComparison.InvariantCulture));
+
+            // Act
+            var composedPredicate = firstPredicate.Or(secondPredicate);
+
+            // Assert
+            Assert.That(() => composedPredicate.Compile()(personOne), Is.True, "First person is matched");
+            Assert.That(() => composedPredicate.Compile()(personTwo), Is.False, "Second person is not matched");
+            Assert.That(() => composedPredicate.Compile()(personThree), Is.True, "Third person is matched");
+        }
+
+        [Test, AutoMoqData]
+        public void Not_negates_a_predicate(Person personOne,
+                                            Person personTwo,
+                                            Person personThree)
+        {
+            // Arrange
+            personOne.Name = "Billy";
+            personTwo.Name = "Bob";
+            personThree.Name = "Thornton";
+
+            var predicate = Predicate.Create<Person>(p => p.Name.EndsWith("y", StringComparison.InvariantCulture));
+
+            // Act
+            var composedPredicate = predicate.Not();
+
+            // Assert
+            Assert.That(() => composedPredicate.Compile()(personOne), Is.False, "First person is not matched");
+            Assert.That(() => composedPredicate.Compile()(personTwo), Is.True, "Second person is matched");
+            Assert.That(() => composedPredicate.Compile()(personThree), Is.True, "Third person is matched");
+        }
     }
-
-    [Test,AutoMoqData]
-    public void Or_creates_predicate_which_satisfies_both_predicates(Person personOne,
-                                                                     Person personTwo,
-                                                                     Person personThree)
-    {
-      // Arrange
-      personOne.Name = "Billy";
-      personTwo.Name = "Bob";
-      personThree.Name = "Thornton";
-
-      var firstPredicate = Predicate.Create<Person>(p => p.Name.EndsWith("y", StringComparison.InvariantCulture));
-      var secondPredicate = Predicate.Create<Person>(p => p.Name.EndsWith("n", StringComparison.InvariantCulture));
-
-      // Act
-      var composedPredicate = firstPredicate.Or(secondPredicate);
-
-      // Assert
-      Assert.That(() => composedPredicate.Compile()(personOne), Is.True, "First person is matched");
-      Assert.That(() => composedPredicate.Compile()(personTwo), Is.False, "Second person is not matched");
-      Assert.That(() => composedPredicate.Compile()(personThree), Is.True, "Third person is matched");
-    }
-
-    [Test,AutoMoqData]
-    public void Not_negates_a_predicate(Person personOne,
-                                        Person personTwo,
-                                        Person personThree)
-    {
-      // Arrange
-      personOne.Name = "Billy";
-      personTwo.Name = "Bob";
-      personThree.Name = "Thornton";
-
-      var predicate = Predicate.Create<Person>(p => p.Name.EndsWith("y", StringComparison.InvariantCulture));
-
-      // Act
-      var composedPredicate = predicate.Not();
-
-      // Assert
-      Assert.That(() => composedPredicate.Compile()(personOne), Is.False, "First person is not matched");
-      Assert.That(() => composedPredicate.Compile()(personTwo), Is.True, "Second person is matched");
-      Assert.That(() => composedPredicate.Compile()(personThree), Is.True, "Third person is matched");
-    }
-  }
 }

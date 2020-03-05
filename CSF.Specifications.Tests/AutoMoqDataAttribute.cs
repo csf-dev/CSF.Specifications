@@ -30,10 +30,10 @@ using AutoFixture.NUnit3;
 
 namespace CSF.Specifications.Tests
 {
-  public class AutoMoqDataAttribute : AutoDataAttribute
-  {
-    public AutoMoqDataAttribute() : base(()=> new Fixture().Customize(new AutoMoqCustomization()))
+    public class AutoMoqDataAttribute : AutoDataAttribute
     {
+        public AutoMoqDataAttribute() : base(() => new Fixture().Customize(new AutoMoqCustomization()))
+        {
+        }
     }
-  }
 }

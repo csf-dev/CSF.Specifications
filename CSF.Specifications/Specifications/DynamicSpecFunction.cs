@@ -1,5 +1,5 @@
 ﻿//
-// ISpecification.cs
+// DynamicSpecificationExpression.cs
 //
 // Author:
 //       Craig Fowler <craig@csf-dev.com>
@@ -24,19 +24,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+
 namespace CSF.Specifications
 {
-  /// <summary>
-  /// A type which acts as a specification, and may be used to test object instances to determine whether or not they
-  /// conform to that specification.
-  /// </summary>
-  public interface ISpecification
-  {
     /// <summary>
-    /// Gets a value which indicates whether or not the given object matches this specification instance or not.
+    /// A dynamic specification function which uses an arbitrary predicate.
+    /// Likely, either it was created that way or it composes other functions.
     /// </summary>
-    /// <returns><c>true</c> if the object matches this specification; <c>false</c> otherwise.</returns>
-    /// <param name="obj">The object instance to test against the specification.</param>
-    bool Matches(object obj);
-  }
+    class DynamicSpecFunction<T> : ISpecificationFunction<T>
+    {
+        readonly Func<T, bool> function;
+
+        public Func<T, bool> GetFunction() => function;
+
+        internal DynamicSpecFunction(Func<T, bool> function)
+        {
+            this.function = function ?? throw new ArgumentNullException(nameof(function));
+        }
+    }
 }

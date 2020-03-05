@@ -30,7 +30,7 @@ using System.Linq;
 namespace CSF.Specifications.Tests.Specifications
 {
     [TestFixture, Parallelizable]
-    public class SpecificationExpressionTests
+    public class SpecificationFunctionTests
     {
         [Test, AutoMoqData]
         public void AsPredicate_returns_predicate_which_matches_a_matching_object(Person person)
@@ -117,7 +117,7 @@ namespace CSF.Specifications.Tests.Specifications
         }
 
         [Test, AutoMoqData]
-        public void And_creates_combined_expression_which_must_satisfy_both(Person personOne,
+        public void And_creates_combined_function_which_must_satisfy_both(Person personOne,
                                                                             Person personTwo,
                                                                             Person personThree)
         {
@@ -129,12 +129,12 @@ namespace CSF.Specifications.Tests.Specifications
             personThree.Identity = 3;
             personThree.Name = "Anna";
 
-            var firstSpec = new PersonNameSpecificationExpression("Anna");
+            var firstSpec = new PersonNameSpecificationFunction("Anna");
             var secondSpec = new PersonIdentifierSpecificationExpression(2);
 
             var combinedSpec = firstSpec.And(secondSpec);
 
-            var people = new[] { personOne, personTwo, personThree }.AsQueryable();
+            var people = new[] { personOne, personTwo, personThree };
 
             var result = people.Where(combinedSpec).ToArray();
 
@@ -142,7 +142,7 @@ namespace CSF.Specifications.Tests.Specifications
         }
 
         [Test, AutoMoqData]
-        public void Or_creates_combined_expression_which_must_satisfy_either(Person personOne,
+        public void Or_creates_combined_function_which_must_satisfy_either(Person personOne,
                                                                              Person personTwo,
                                                                              Person personThree)
         {
@@ -154,63 +154,11 @@ namespace CSF.Specifications.Tests.Specifications
             personThree.Identity = 3;
             personThree.Name = "Jo";
 
-            var firstSpec = new PersonNameSpecificationExpression("Anna");
+            var firstSpec = new PersonNameSpecificationFunction("Anna");
             var secondSpec = new PersonIdentifierSpecificationExpression(3);
 
             var combinedSpec = firstSpec.Or(secondSpec);
 
-            var people = new[] { personOne, personTwo, personThree }.AsQueryable();
-
-            // Act
-            var result = people.Where(combinedSpec).ToArray();
-
-            // Assert
-            Assert.That(result, Is.EquivalentTo(new[] { personTwo, personThree }));
-        }
-
-        [Test, AutoMoqData]
-        public void And_a_function_creates_combined_function_which_must_satisfy_both(Person personOne,
-                                                                            Person personTwo,
-                                                                            Person personThree)
-        {
-            // Arrange
-            personOne.Identity = 1;
-            personOne.Name = "Bob";
-            personTwo.Identity = 2;
-            personTwo.Name = "Anna";
-            personThree.Identity = 3;
-            personThree.Name = "Anna";
-
-            var firstSpec = new PersonIdentifierSpecificationExpression(2);
-            var secondSpec = new PersonNameSpecificationFunction("Anna");
-
-            var combinedSpec = firstSpec.And(secondSpec);
-
-            var people = new[] { personOne, personTwo, personThree };
-
-            var result = people.Where(combinedSpec).ToArray();
-
-            Assert.That(result, Is.EquivalentTo(new[] { personTwo }));
-        }
-
-        [Test, AutoMoqData]
-        public void Or_a_function_creates_combined_function_which_must_satisfy_either(Person personOne,
-                                                                             Person personTwo,
-                                                                             Person personThree)
-        {
-            // Arrange
-            personOne.Identity = 1;
-            personOne.Name = "Bob";
-            personTwo.Identity = 2;
-            personTwo.Name = "Anna";
-            personThree.Identity = 3;
-            personThree.Name = "Jo";
-
-            var firstSpec = new PersonIdentifierSpecificationExpression(3);
-            var secondSpec = new PersonNameSpecificationFunction("Anna");
-
-            var combinedSpec = firstSpec.Or(secondSpec);
-
             var people = new[] { personOne, personTwo, personThree };
 
             // Act
@@ -220,6 +168,6 @@ namespace CSF.Specifications.Tests.Specifications
             Assert.That(result, Is.EquivalentTo(new[] { personTwo, personThree }));
         }
 
-        ISpecificationExpression<Person> GetSut(string name) => new PersonNameSpecificationExpression(name);
+        ISpecificationFunction<Person> GetSut(string name) => new PersonNameSpecificationFunction(name);
     }
 }
