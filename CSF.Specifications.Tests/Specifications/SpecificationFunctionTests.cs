@@ -117,7 +117,7 @@ namespace CSF.Specifications.Tests.Specifications
         }
 
         [Test, AutoMoqData]
-        public void And_creates_combined_expression_which_must_satisfy_both(Person personOne,
+        public void And_creates_combined_function_which_must_satisfy_both(Person personOne,
                                                                             Person personTwo,
                                                                             Person personThree)
         {
@@ -129,7 +129,7 @@ namespace CSF.Specifications.Tests.Specifications
             personThree.Identity = 3;
             personThree.Name = "Anna";
 
-            var firstSpec = new PersonNameSpecificationExpression("Anna");
+            var firstSpec = new PersonNameSpecificationFunction("Anna");
             var secondSpec = new PersonIdentifierSpecificationExpression(2);
 
             var combinedSpec = firstSpec.And(secondSpec);
@@ -142,7 +142,7 @@ namespace CSF.Specifications.Tests.Specifications
         }
 
         [Test, AutoMoqData]
-        public void Or_creates_combined_expression_which_must_satisfy_either(Person personOne,
+        public void Or_creates_combined_function_which_must_satisfy_either(Person personOne,
                                                                              Person personTwo,
                                                                              Person personThree)
         {
@@ -154,7 +154,7 @@ namespace CSF.Specifications.Tests.Specifications
             personThree.Identity = 3;
             personThree.Name = "Jo";
 
-            var firstSpec = new PersonNameSpecificationExpression("Anna");
+            var firstSpec = new PersonNameSpecificationFunction("Anna");
             var secondSpec = new PersonIdentifierSpecificationExpression(3);
 
             var combinedSpec = firstSpec.Or(secondSpec);
