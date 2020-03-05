@@ -34,9 +34,9 @@ A specification class, created using this package looks like this:
 using CSF.Specifications;
 using System.Linq.Expressions;
 
-public class DeliveryIsLate : SpecificationExpression<Delivery>
+public class DeliveryIsLate : ISpecificationExpression<Delivery>
 {
-    public override Expression<Func<Delivery, bool>> GetExpression()
+    public Expression<Func<Delivery, bool>> GetExpression()
     {
         return x => !x.Cancelled
                     && !x.Received
@@ -45,18 +45,20 @@ public class DeliveryIsLate : SpecificationExpression<Delivery>
 }
 ```
 
-Our example above immediately becomes more clear (it will now require `using CSF.Specifications;`).
+Our example above immediately becomes more clear.
 
 ```csharp
+using CSF.Specifications;
+
 var lateDeliveries = deliveries
     .Where(new DeliveryIsLate())
     .ToList();
 ```
 
-## Specifications may use constructor parameters
-The specification class shown above has no constructor parameters.  Say that the number of
-days since dispatch is variable and needs to be a parameter, it's not always thirty. It is
-simple to move the hard-coded 30 to a `private readonly` field and to initialise it from
+## Specifications may be parameterized
+The sample class shown above has no constructor parameters.  Say that the number of
+days since dispatch is variable and needs to be a parameter; it's not always thirty. It is
+simple to move the hard-coded 30 to a `readonly` field and to initialise it from
 the class constructor.  This is how to create *parameterized specifications*.
 
 ## Specifications may be composed
@@ -86,9 +88,9 @@ in exactly the same way as any other.
 using CSF.Specifications;
 using System.Linq.Expressions;
 
-public class DeliveryIsLateAndIncludesHighValueGoods : SpecificationExpression<Delivery>
+public class DeliveryIsLateAndIncludesHighValueGoods : ISpecificationExpression<Delivery>
 {
-    public override Expression<Func<Delivery, bool>> GetExpression()
+    public Expression<Func<Delivery, bool>> GetExpression()
     {
         return new DeliveryIsLate()
             .And(new DeliveryIncludesHighValueGoods())
@@ -96,6 +98,9 @@ public class DeliveryIsLateAndIncludesHighValueGoods : SpecificationExpression<D
     }
 }
 ```
+
+## Full documentation
+For full documentation on using this library, please [read the wiki for this repository].
 
 ## Open source license
 All source files within this project are released as open source software,
@@ -105,5 +110,5 @@ under the terms of [the MIT license].
 [the work by Vladimir Khorikov]: https://enterprisecraftsmanship.com/posts/specification-pattern-c-implementation/
 [the NHibernate ORM]: https://nhibernate.info/
 [this article by Pete Montgomery]: https://petemontgomery.wordpress.com/2011/02/10/a-universal-predicatebuilder/
-[the project wiki]: https://github.com/csf-dev/CSF.Specifications/wiki
+[read the wiki for this repository]: https://github.com/csf-dev/CSF.Specifications/wiki
 [the MIT license]: http://opensource.org/licenses/MIT
