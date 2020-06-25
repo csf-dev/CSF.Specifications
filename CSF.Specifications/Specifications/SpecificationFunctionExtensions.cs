@@ -129,6 +129,27 @@ namespace CSF.Specifications
             return Spec.Func<T>(o => func1(o) || func2(o));
         }
 
+        /// <summary>
+        /// Transforms a specification object to a new specified-type, by using a selector function to indicate how
+        /// the intended type will provide the originally-specified type.
+        /// </summary>
+        /// <returns>A transformed specification object.</returns>
+        /// <param name="spec">The original specification to transform.</param>
+        /// <param name="transformation">A transformation to perform on the specification.</param>
+        /// <typeparam name="TOrigin">The original specified type.</typeparam>
+        /// <typeparam name="TTarget">The new specified type (after transformation).</typeparam>
+        public static ISpecificationFunction<TTarget> Transform<TOrigin, TTarget>(this ISpecificationFunction<TOrigin> spec,
+                                                                                  Func<IGetsTransformedSpecificationFunction<TOrigin>, ISpecificationFunction<TTarget>> transformation)
+        {
+            if (spec == null)
+                throw new ArgumentNullException(nameof(spec));
+            if (transformation == null)
+                throw new ArgumentNullException(nameof(transformation));
+
+            var transformer = new SpecificationFunctionTransformer<TOrigin>(spec);
+            return transformation(transformer);
+        }
+
         static Func<T,bool> GetFunction<T>(ISpecificationFunction<T> spec)
         {
             if (spec == null) throw new ArgumentNullException(nameof(spec));

@@ -154,6 +154,27 @@ namespace CSF.Specifications
             return expr.Compile();
         }
 
+        /// <summary>
+        /// Transforms a specification object to a new specified-type, by using a selector expression to indicate how
+        /// the intended type will provide the originally-specified type.
+        /// </summary>
+        /// <returns>A transformed specification object.</returns>
+        /// <param name="spec">The original specification to transform.</param>
+        /// <param name="transformation">A transformation to perform on the specification.</param>
+        /// <typeparam name="TOrigin">The original specified type.</typeparam>
+        /// <typeparam name="TTarget">The new specified type (after transformation).</typeparam>
+        public static ISpecificationExpression<TTarget> Transform<TOrigin,TTarget>(this ISpecificationExpression<TOrigin> spec,
+                                                                                   Func<IGetsTransformedSpecificationExpression<TOrigin>,ISpecificationExpression<TTarget>> transformation)
+        {
+            if (spec == null)
+                throw new ArgumentNullException(nameof(spec));
+            if (transformation == null)
+                throw new ArgumentNullException(nameof(transformation));
+
+            var transformer = new SpecificationExpressionTransformer<TOrigin>(spec);
+            return transformation(transformer);
+        }
+
         internal static Expression<Func<T,bool>> GetExpressionOrThrow<T>(this ISpecificationExpression<T> spec)
         {
             if (spec == null) throw new ArgumentNullException(nameof(spec));

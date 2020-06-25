@@ -1,10 +1,10 @@
 ﻿//
-// Person.cs
+// IGetsTransformedSpecificationFunction.cs
 //
 // Author:
-//       Craig Fowler <craig@craigfowler.me.uk>
+//       Craig Fowler <craig@csf-dev.com>
 //
-// Copyright (c) 2017 Craig Fowler
+// Copyright (c) 2020 Craig Fowler
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,22 +24,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-
-namespace CSF.Specifications.Tests.Stubs
+namespace CSF.Specifications
 {
-    public class Person
+    /// <summary>
+    /// A helper to get a transformed specification instance.
+    /// </summary>
+    public interface IGetsTransformedSpecificationFunction<TOrigin>
     {
-        public virtual long Identity
-        {
-            get;
-            set;
-        }
-
-        public virtual string Name
-        {
-            get;
-            set;
-        }
+        /// <summary>
+        /// Transforms the specification to a target type, using a selector function.
+        /// </summary>
+        /// <returns>The transformed specification function.</returns>
+        /// <param name="selector">A selector to specify how an instance of the transformed/target type may be used to get an instance of the originally-specified type.</param>
+        /// <typeparam name="TTarget">The target type.</typeparam>
+        ISpecificationFunction<TTarget> To<TTarget>(Func<TTarget, TOrigin> selector);
     }
 }
-

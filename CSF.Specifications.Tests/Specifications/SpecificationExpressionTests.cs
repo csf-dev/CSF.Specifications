@@ -220,6 +220,24 @@ namespace CSF.Specifications.Tests.Specifications
             Assert.That(result, Is.EquivalentTo(new[] { personTwo, personThree }));
         }
 
+        [Test, AutoMoqData]
+        public void Transform_may_create_a_transformed_matching_specification_expression_for_a_new_type(Pet pet, string name)
+        {
+            var spec = Spec.Expr<Person>(x => x.Name == name);
+            var transformed = spec.Transform(t => t.To<Pet>(x => x.Owner));
+            pet.Owner.Name = name;
+            Assert.That(() => transformed.Matches(pet), Is.True);
+        }
+
+        [Test, AutoMoqData]
+        public void Transform_may_create_a_transformed_non_matching_specification_expression_for_a_new_type(Pet pet)
+        {
+            var spec = Spec.Expr<Person>(x => x.Name == "One");
+            var transformed = spec.Transform(t => t.To<Pet>(x => x.Owner));
+            pet.Owner.Name = "Two";
+            Assert.That(() => transformed.Matches(pet), Is.False);
+        }
+
         ISpecificationExpression<Person> GetSut(string name) => new PersonNameSpecificationExpression(name);
     }
 }

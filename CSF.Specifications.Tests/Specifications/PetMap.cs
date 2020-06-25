@@ -1,10 +1,10 @@
 ﻿//
-// Person.cs
+// PetMap.cs
 //
 // Author:
-//       Craig Fowler <craig@craigfowler.me.uk>
+//       Craig Fowler <craig@csf-dev.com>
 //
-// Copyright (c) 2017 Craig Fowler
+// Copyright (c) 2020 Craig Fowler
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,22 +24,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+using CSF.Specifications.Tests.Stubs;
+using NHibernate.Mapping.ByCode;
+using NHibernate.Mapping.ByCode.Conformist;
 
-namespace CSF.Specifications.Tests.Stubs
+namespace CSF.Specifications.Tests.Specifications
 {
-    public class Person
+    public class PetMap : ClassMapping<Pet>
     {
-        public virtual long Identity
+        public PetMap()
         {
-            get;
-            set;
-        }
+            Id(x => x.Identity, m => {
+                m.Generator(Generators.Assigned);
+            });
 
-        public virtual string Name
-        {
-            get;
-            set;
+            ManyToOne(x => x.Owner);
         }
     }
 }
-

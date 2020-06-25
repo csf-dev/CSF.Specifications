@@ -1,10 +1,10 @@
 ﻿//
-// Person.cs
+// Pet.cs
 //
 // Author:
-//       Craig Fowler <craig@craigfowler.me.uk>
+//       Craig Fowler <craig@csf-dev.com>
 //
-// Copyright (c) 2017 Craig Fowler
+// Copyright (c) 2020 Craig Fowler
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,22 +24,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-
 namespace CSF.Specifications.Tests.Stubs
 {
-    public class Person
+    public class Pet
     {
-        public virtual long Identity
-        {
-            get;
-            set;
-        }
-
-        public virtual string Name
-        {
-            get;
-            set;
-        }
+        public virtual long Identity { get; set; }
+        public virtual Person Owner { get; set; }
     }
 }
-

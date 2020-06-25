@@ -1,10 +1,10 @@
 ﻿//
-// Person.cs
+// IGetsTransformedSpecificationExpression.cs
 //
 // Author:
-//       Craig Fowler <craig@craigfowler.me.uk>
+//       Craig Fowler <craig@csf-dev.com>
 //
-// Copyright (c) 2017 Craig Fowler
+// Copyright (c) 2020 Craig Fowler
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,22 +24,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+using System.Linq.Expressions;
 
-namespace CSF.Specifications.Tests.Stubs
+namespace CSF.Specifications
 {
-    public class Person
+    /// <summary>
+    /// A helper to get a transformed specification instance.
+    /// </summary>
+    public interface IGetsTransformedSpecificationExpression<TOrigin>
     {
-        public virtual long Identity
-        {
-            get;
-            set;
-        }
-
-        public virtual string Name
-        {
-            get;
-            set;
-        }
+        /// <summary>
+        /// Transforms the specification to a target type, using a selector expression.
+        /// </summary>
+        /// <returns>The transformed specification expression.</returns>
+        /// <param name="selector">A selector to specify how an instance of the transformed/target type may be used to get an instance of the originally-specified type.</param>
+        /// <typeparam name="TTarget">The target type.</typeparam>
+        ISpecificationExpression<TTarget> To<TTarget>(Expression<Func<TTarget,TOrigin>> selector);
     }
 }
-
