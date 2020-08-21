@@ -67,7 +67,7 @@ omit its actual logic but let's imagine it is named `DeliveryIncludesHighValueGo
 want to construct a query for all deliveries which include high-value goods **and** which
 are late.
 
-### Combine dynamically
+### ... dynamically
 It's possible to combine specifications dynamically, creating a new specification on-the-fly
 for one-off usages.
 
@@ -79,7 +79,7 @@ var lateHighValueDeliveries = deliveries
     .ToList();
 ```
 
-### As a new specification
+### ... or using a class
 If this new composite specification is one which needs to be reusable, it's also simple to
 create a new specification class which combines them.  This new specification class is reusable
 in exactly the same way as any other.
