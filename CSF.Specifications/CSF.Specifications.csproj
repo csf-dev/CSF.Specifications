@@ -26,12 +26,9 @@
     <DebugType></DebugType>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\CSF.Specifications.xml</DocumentationFile>
   </PropertyGroup>
+  
   <ItemGroup>
     <PackageReference Include="System.Linq.Queryable" Version="4.3.0" Condition="$(TargetFramework) == 'netstandard1.0'" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" Condition="'$(TargetFramework)' == 'net45'" />
   </ItemGroup>
-    
-  <ItemGroup>
-    <Compile Remove="Specifications\Specification.cs" />
-  </ItemGroup>
-  <Import Project="..\Tools\EnableNet45BuildOnUnix.targets" />
 </Project>
