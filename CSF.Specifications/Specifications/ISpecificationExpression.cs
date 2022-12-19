@@ -55,5 +55,48 @@ namespace CSF.Specifications
         /// </summary>
         /// <returns>A predicate function</returns>
         Expression<Func<T, bool>> GetExpression();
+
+#if NETCOREAPP3_1_OR_GREATER
+
+        /// <summary>
+        /// Operator overload equivalent to <see cref="SpecificationExpressionExtensions.And{T}(ISpecificationExpression{T}, ISpecificationExpression{T})" />.
+        /// </summary>
+        /// <param name="first">A specification expression</param>
+        /// <param name="second">A specification expression</param>
+        /// <returns>A specification expression that is the logical AND of the two specified specifications.</returns>
+        static ISpecificationExpression<T> operator &(ISpecificationExpression<T> first, ISpecificationExpression<T> second) => first.And(second);
+
+        /// <summary>
+        /// Operator overload equivalent to <see cref="SpecificationExpressionExtensions.And{T}(ISpecificationExpression{T}, ISpecificationFunction{T})" />.
+        /// </summary>
+        /// <param name="first">A specification expression</param>
+        /// <param name="second">A specification function</param>
+        /// <returns>A specification function that is the logical AND of the two specified specifications.</returns>
+        static ISpecificationFunction<T> operator &(ISpecificationExpression<T> first, ISpecificationFunction<T> second) => first.And(second);
+
+        /// <summary>
+        /// Operator overload equivalent to <see cref="SpecificationExpressionExtensions.Or{T}(ISpecificationExpression{T}, ISpecificationExpression{T})" />.
+        /// </summary>
+        /// <param name="first">A specification expression</param>
+        /// <param name="second">A specification expression</param>
+        /// <returns>A specification expression that is the logical OR of the two specified specifications.</returns>
+        static ISpecificationExpression<T> operator |(ISpecificationExpression<T> first, ISpecificationExpression<T> second) => first.Or(second);
+
+        /// <summary>
+        /// Operator overload equivalent to <see cref="SpecificationExpressionExtensions.Or{T}(ISpecificationExpression{T}, ISpecificationFunction{T})" />.
+        /// </summary>
+        /// <param name="first">A specification expression</param>
+        /// <param name="second">A specification function</param>
+        /// <returns>A specification function that is the logical OR of the two specified specifications.</returns>
+        static ISpecificationFunction<T> operator |(ISpecificationExpression<T> first, ISpecificationFunction<T> second) => first.Or(second);
+
+        /// <summary>
+        /// Operator overload equivalent to <see cref="SpecificationExpressionExtensions.Not{T}(ISpecificationExpression{T})" />.
+        /// </summary>
+        /// <param name="spec">A specification expression</param>
+        /// <returns>A specification expression that is the logical NOT of the specified specification.</returns>
+        static ISpecificationExpression<T> operator !(ISpecificationExpression<T> spec) => spec.Not();
+
+#endif
     }
 }

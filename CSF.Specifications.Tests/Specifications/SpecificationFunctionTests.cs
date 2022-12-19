@@ -186,6 +186,68 @@ namespace CSF.Specifications.Tests.Specifications
             Assert.That(() => transformed.Matches(pet), Is.False);
         }
 
+        [Test,AutoMoqData]
+        public void AndOperator_creates_a_spec_which_must_match_both(Person personOne,
+                                                                            Person personTwo,
+                                                                            Person personThree)
+        {
+            personOne.Identity = 1;
+            personOne.Name = "Bob";
+            personTwo.Identity = 2;
+            personTwo.Name = "Anna";
+            personThree.Identity = 3;
+            personThree.Name = "Anna";
+
+            ISpecificationFunction<Person> firstSpec = new PersonIdentifierSpecificationFunction(2);
+            var secondSpec = new PersonNameSpecificationFunction("Anna");
+
+            var combinedSpec = firstSpec & secondSpec;
+
+            var people = new[] { personOne, personTwo, personThree };
+
+            var result = people.Where(combinedSpec).ToArray();
+
+            Assert.That(result, Is.EquivalentTo(new[] { personTwo }));
+        }
+
+        [Test,AutoMoqData]
+        public void OrOperator_creates_a_spec_which_must_match_either(Person personOne,
+                                                                            Person personTwo,
+                                                                            Person personThree)
+        {
+            personOne.Identity = 1;
+            personOne.Name = "Bob";
+            personTwo.Identity = 2;
+            personTwo.Name = "Anna";
+            personThree.Identity = 3;
+            personThree.Name = "Anna";
+
+            ISpecificationFunction<Person> firstSpec = new PersonIdentifierSpecificationFunction(2);
+            var secondSpec = new PersonNameSpecificationFunction("Anna");
+
+            var combinedSpec = firstSpec | secondSpec;
+
+            var people = new[] { personOne, personTwo, personThree };
+
+            var result = people.Where(combinedSpec).ToArray();
+
+            Assert.That(result, Is.EquivalentTo(new[] { personTwo, personThree }));
+        }
+
+        [Test, AutoMoqData]
+        public void NotOperator_returns_specification_which_does_not_match_a_matching_object(Person person)
+        {
+            // Arrange
+            person.Name = "Bob";
+            var spec = GetSut("Bob");
+
+            // Act
+            var result = (!spec).Matches(person);
+
+            // Assert
+            Assert.That(result, Is.False);
+        }
+
         ISpecificationFunction<Person> GetSut(string name) => new PersonNameSpecificationFunction(name);
     }
 }
